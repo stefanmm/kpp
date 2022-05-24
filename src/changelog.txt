@@ -1,0 +1,41 @@
+v1.2.7
+- Dodatak migriran na Manifest V3 verziju
+- CSS ispravke, najviše za novu opciju "Sačuvaj pretragu"
+
+v1.2.6
+- Dodata opcija: onemogući noćni mod prilikom dodavanja oglasa.
+- Ispravljeno: sitne CSS ispravke za noćni mod.
+- Ispravljeno: "uveličaj sliku na klik" učitava manju verziju slike.
+
+v1.2.5
+- Brzi pregled: sada je moguće zatvoriti popup pritiskom na "esc" taster
+- Brzi prikaz slike: sada je moguće zatvoriti popup pritiskom na "esc" taster
+- Noćni mod: "automatski noćni mod" je sada podrazumevano isključen jer se kod mnogih korisnika tema ne menja automatski
+
+v1.2.2
+- Poboljšano: noćni mod na ekranu za dodavanje/izmenu oglasa i još nekim delovima sajta
+
+v1.2.1
+- Ispravljeno: neke ikonice dodatka se ne prikazuju
+- Sada su sve opcije dodatka podrazumevano uključene
+- Uklonjena dozvola "activeTab" jer se više ne koristi
+
+v1.2
+- Dodata opcija: Plutajuća traka sa informacijama (pojavljuje se na stranici oglasa kada korisnik skroluje dole)
+- Redizajniran panel sa opcijama
+- Poboljšano: moguće je uskladiti noćni mod sa temom sistema/veb pregledača
+
+v1.1.1
+- Ispravljena greška: noćni logo se pojavljuje i kada je noćni mod isključen
+
+v1.1
+- Poboljšan noćni mod (više nema belog ekran prilikom učitavanja sajta ako je noćni mod uključen)
+- Dodata opcija: Uveličaj sliku na klik (uveličaj sliku iz rezultata pretrage / listinga klikom na istu)
+- Dodate ikonice u panelu za podešavanja radi lakšeg snalaženja
+- Ostale sitne ispravke u kodu
+
+v1.0
+- Prva verzija
+- Brzi pregled oglasa (na klik)
+- Brzi prikaz ocena (prelaskom preko oglasa)
+- Noćni mod

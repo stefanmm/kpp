@@ -1,0 +1,814 @@
+#kpp_float_holder {
+	display:none;
+	position: fixed;
+    bottom: 0;
+	height: 50px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 20px rgb(0 0 0 / 28%);
+	z-index: 1;
+}
+
+.floatNaziv {
+	font-size: 17px;
+	    font-weight: bold;
+}
+.floatPrice {
+	    font-size: 14px;
+    color: #c00;
+    font-weight: bold;
+}
+.kpp_float_content {
+	display:flex;
+	    align-items: center;
+	max-width:970px;
+	margin: 0 auto;
+	    height: 100%;
+		position:relative;
+}
+.kpp_float_content .floatImg img {
+	max-width: 50px;
+    max-height: 50px;
+}
+.kpp_float_content > div{
+	 display: inline-block;
+	 margin-right: 14px;
+	     line-height: 1;
+}
+#kpp_omiljeno_trigger {
+	    border: 2px solid #62a508;
+    padding: 5px;
+    
+	    display: block;
+    margin-top: 8px;
+}
+#leftNav #kpp_omiljeno_trigger {
+	color: #62a508;
+}
+#leftNav #kpp_omiljeno_trigger:hover {
+	color: #fff;
+	background: #62a508;
+}
+#leftNav #kpp_omiljeno_trigger:hover svg{
+	fill: #fff;
+	
+}
+#adListContainer .item:hover .kpp_dodaj_omiljeno {
+	display:block;
+}
+.kpp_dodaj_omiljeno {
+	display:none;
+	position: absolute;
+       right: 0;
+    bottom: 50px;
+    background: #70A319;
+    width: 24px;
+    height: 24px;
+	color:#fff;
+	fill:#fff;
+	    text-align: center;
+		border-radius: 3px;
+		cursor:pointer;
+}
+.kpp_dodaj_omiljeno svg{
+	    padding: 4px 0;
+}
+#kpp_omiljeno_trigger svg {
+	fill: #62a508;
+	vertical-align: middle;
+}
+.zoomImgHolder {
+ position:absolute;	
+
+     z-index: 99;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+	    background: rgb(0 0 0 / 55%);
+		display:none;
+		cursor:pointer;
+		color:#fff;
+}
+.zoomImgHolder svg{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	fill: #fff;
+	
+}
+.kppLightbox {
+	display: none;
+
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	cursor:pointer;
+}
+
+.kppLightbox .kpp_lightbox_holder {
+	width: 100%;
+    height: 100%;
+	margin: 2% auto 0 auto;
+	max-width: 82%;
+	max-height: 90%;
+	position:relative;
+}
+
+.kppLightbox .kpp_lightbox_holder img {
+       width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.kppLightbox .closeLightbox {
+	position:absolute;
+	top: -20px;
+	right: -30px;
+	background: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+	font-weight: bold;
+    font-size: 20px;
+	color:#000;
+}
+.kppZoomImg:hover .zoomImgHolder {
+	display:block;
+}
+.kpp_close_modal{
+	position: absolute;
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    top: 0;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 1.2;
+    z-index: 999;
+}
+a.kpp_pop_otvori_oglas {
+	color:#307DC1!important;
+	
+}
+div.adListContainer div.item .kpIzlogHolder {
+	bottom: 30px!important;
+}
+.ad-options .ad-option, .oglas-options .oglas-option {
+	margin-right:1px!important;
+}
+.kpp_opcije {
+    background: rgb(255 255 255);
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px #00000026;
+            box-shadow: 0 0 5px #00000026;
+    width: 40px;
+    margin: 5px auto;
+    
+    cursor: pointer;
+}
+.kpp_opcije:hover {
+	-webkit-box-shadow: none;
+	        box-shadow: none;
+	background: #017ec3;
+}
+.kpp_opcije:hover svg {
+	 fill: #fff;
+}
+.kpp_quick-view {
+	padding: 5px 0;
+}
+.kpp_quick-view svg {
+	    fill: #017ec3;
+		
+}
+#kpp_modal_holder * {
+	 -webkit-box-sizing: border-box;
+	         box-sizing: border-box;
+}
+#kpp_modal_holder {
+	position:fixed;
+	z-index:999;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background:transparent;
+}
+#kpp_modal_window {
+	
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 3px solid #307DC1;
+        -webkit-box-shadow: 0 0 60px rgb(0 0 0 / 21%);
+                box-shadow: 0 0 60px rgb(0 0 0 / 21%);
+	max-width:615px;
+	max-height:500px;
+	color:#000;
+	background:#fff;
+	
+   
+	    margin: auto;
+}
+#kpp_modal_data {
+	overflow:auto;
+	    height: 100%;
+    width: 100%;
+	padding: 10px;
+}
+
+.kpp_modal_title {
+	    border-bottom: 1px solid #317dc1;
+    padding-bottom: 10px;
+	    margin-bottom: 10px;
+
+}
+.kpp_modal_korisnik {
+	font-weight:bold;
+}
+.kpp_modal_single_info {
+	font-size:16px;
+	 border-bottom: 1px solid #d1d1d1;
+    margin: 0;
+    padding: 4px 0;
+}
+.desc_data{
+	
+    display: block;
+     
+   
+    margin-top: 10px;
+    border: 1px solid #317dc1;
+    padding: 5px;
+}
+.kpp_row {
+	display: table;
+    width: 100%;
+    position: relative;
+   
+}
+.kpp_modal_cena {
+    color: #cc0000;
+    font-weight: bold;
+   
+}
+.kpp_likes_hover .svg-icon {
+	    fill: #fff;
+    stroke: #023569;
+	    height: 20px;
+    width: 20px;
+}
+.kpp_likes_hover .thumb-down .svg-icon {
+	    margin-top: -1px;
+}
+.kpp_likes_hover .thumb-down span {
+	      margin-right: 5px;
+}
+.kpp_modal_ocene .svg-icon {
+    margin-top: -4px;
+    fill: #fff;
+    stroke: #023569;
+    margin-right: -6px;
+}
+.exit_modal {
+	background:#000;
+	color:#fff;
+	
+	cursor:pointer;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 1.2;
+}
+.desc_data iframe {
+	width:100%;
+	    display: none;
+}
+.kpp_likes_hover .thumb-up span, .kpp_modal_ocene .thumb-up span {
+    color: #8cc541;
+}
+.kpp_likes_hover .thumb-down span,
+.kpp_modal_ocene .thumb-down span {
+color: #ff0000;
+}
+.kpp_likes_hover img {
+	    height: 18px;
+    vertical-align: text-top;
+    padding: 0 5px;
+}
+
+.kpp_modal_ocene .thumb-down .svg-icon {
+    margin-top: 0;
+    margin-bottom: -3px;
+}
+
+.kpp_modal_title a{
+	    font-size: 20px;
+    letter-spacing: 0.2px;
+    margin-bottom: 18px;
+color:#307DC1!important;
+	text-decoration:underline!important;
+}
+.kpp_modal_info .photo-col, .kpp_modal_info .info-col, .kpp_modal_info .contact-col {
+    display: table-cell;
+    vertical-align: top;
+   
+    padding: 0;
+    margin: 0;
+}
+.kpp_modal_info .photo-col {
+    width: 308px;
+}
+
+.kpp_modal_info .contact-col {
+    width: 306px;
+}
+.photo-col a img {
+    max-height: 260px;
+    width: auto;
+	max-width: 300px;
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+}
+html.async-hide {
+	opacity: 1!important;
+}
+/**********************************************************************/
+/***************************** NIGHT MODE *****************************/
+/**********************************************************************/
+.kpp_night body{
+	background: #2b2b2b;
+	color: #fff;
+}
+
+
+.kpp_night #footerHolder {
+	    background-color: #1c1c1c;
+}
+.kpp_night div.footer {
+   
+    color: #d2d2d2;
+    
+}
+.kpp_night #headerPlaceholder {
+    background-color: #2b2b2b;
+}
+.kpp_night #topNavBlue>.navLinks>a:hover {
+    background-color: rgb(255 255 255 / 30%);
+   
+}
+.kpp_night .categoryListLeft a:active, 
+.kpp_night .categoryListLeft a:link, 
+.kpp_night .categoryListLeft a:visited,
+.kpp_night #leftNav a:active, 
+.kpp_night #leftNav a:link, 
+.kpp_night #leftNav a:visited {
+    color: #eaeaea!important;
+}
+
+.kpp_night .icon-holder {
+	    background: #fff;
+}
+.kpp_night #userMojKPLeft a:hover,
+.kpp_night .categoryListLeft a:hover,
+.kpp_night #tabsClean a:link, 
+.kpp_night #tabsClean a:visited,
+.kpp_night #tabs_new a:link, 
+.kpp_night #tabs_new a:visited,
+.kpp_night #tabsClean a.current {
+    background: #646464;
+}
+.kpp_night #leftNav a.mojKp {
+	    background: #017ec3;
+}
+.kpp_night a:active, 
+.kpp_night a:link, 
+.kpp_night a:visited,
+.kpp_night .categoryBox a:active, 
+.kpp_night .categoryBox a:link, 
+.kpp_night .categoryBox a:visited,
+.kpp_night .ad-title, 
+.kpp_night .oglas-title,
+.kpp_night div.adListContainer div.item.head section.messageSec a,
+.kpp_night div.pageBarHolder ul.pagesList li.break, 
+.kpp_night div.pageBarHolder ul.pagesList li a,
+.kpp_night a.adName:active, 
+.kpp_night a.adName:link,
+.kpp_night a.adName:visited,
+.kpp_night a.crumbs:active, 
+.kpp_night a.crumbs:link,
+.kpp_night a.crumbs:visited,
+.kpp_night div.pageBarHolder div.goToPage,
+.kpp_night .search-form-scope,
+.kpp_night div.footer a:active, 
+.kpp_night div.footer a:link, 
+.kpp_night div.footer a:visited,
+.kpp_night a.adActions:link, 
+.kpp_night a.adActions:active, 
+.kpp_night a.adActions:visited,
+.kpp_night .car-section-title,
+.kpp_night .ad-description ul li:before, 
+.kpp_night .oglas-description ul li:before,
+.kpp_night .userInformation .moreInformationList li a,
+.kpp_night a.actionSmall:active, .kpp_night a.actionSmall:link, .kpp_night a.actionSmall:visited {
+
+    color: #ffffff;
+}
+
+.kpp_night .car-stats .row:nth-child(odd) {
+    background-color: #414141;
+}
+.kpp_night .kpp_modal_desc .car-stats .row:nth-child(odd) {
+      background-color: #d7d7d7;
+}
+
+.kpp_night .oglas-option .confirmation a {
+	color:#000;
+}
+.kpp_night div.adListContainer div.item.head section.messageSec a:hover {
+    color: #ff6c6c;
+}
+.kpp_night .snake.choice .choiceLabelHolder .choiceOption, 
+.kpp_night .snake.choice .choiceOption,
+.kpp_night .searchRecentLink,
+.kpp_night .pill-element {
+
+    background: #626262;
+}
+.kpp_night #searchFormDisplayChoicesHolder .choiceMenu iframe,
+.kpp_night .searchFormChoicesList .choice.opened .choiceMenu,
+.kpp_night .uiMenuHolder iframe {
+	background: #2b2b2b!important;
+}
+.kpp_night div.adListContainer div.item .adDescription,
+.kpp_night .views-count,
+.kpp_night .contact-info-row .contact-name {
+	color: #ececec!important;
+}
+.kpp_night div.adListContainer div.item.head {
+	background: #385c6d;
+}
+.kpp_night div.adListContainer div.item.adHighlighted {
+	border: 1px solid #3cc1ff;
+    background-color: #385c6d;
+}
+.kpp_night div.adListContainer div.item .adPrice,
+.kpp_night .price-holder,
+.kpp_night #kpp_float_holder .floatPrice,
+.kpp_night .price {
+	    color: #ff6c6c;
+}
+.kpp_night .sendMessageBtn3 {
+	    background: #007ec3;
+		    border: 1px solid #007ec3;
+}
+.kpp_night #addressBookSwitch svg {
+	    stroke: #fafafa;
+}
+.kpp_night .reviews-list .single-review {
+	    background: #666666;
+}
+.kpp_night .reviews-list .single-review .single-review__header .single-review__related-to {
+	color:#fff;
+}
+.kpp_night .reviews-list .single-review .single-review__review-stats .review-stat,
+.kpp_night .reviews-list .single-review .single-review__date {
+	    color: #dfdfdf;
+}
+.kpp_night .reviews-list .single-review .single-review__comment {
+	    background: #e9e9e9;
+}
+.kpp_night .reviews-list .single-review .single-review__comment:before {
+	    border-right: 6px solid #e9e9e9;
+}
+.kpp_night .oglas-options .oglas-option.actions-option .action-menu a,
+.kpp_night #be-careful .warning-text a {
+	color:#000!important;
+}
+.kpp_night div.searchFormUnderBubble {
+	    background: #4a4a4a;
+}
+.kpp_night .searchFormChoicesList .choice .choiceContent .choiceOption .choiceOptionClose {
+	    color: #000!important;
+}
+.kpp_night div.adListContainer.userAds div.item.odd {
+    background-color: #414141;
+}
+.kpp_night div.adListContainer div.item {
+	    border-bottom: solid 1px #7c7c7c;
+}
+.kpp_night a.moj-kp-option-button {
+	    background: #1b669a;
+}
+.kpp_night .nbs-widget form,
+.kpp_night .nbs-widget form table td,
+.kpp_night .nbs-widget .uiMenuButton #dropdown {
+	color:#fff!important;
+}
+.kpp_night .big-image-content .header-placeholder {
+	background:#000;
+}
+.kpp_night .big-image-content .header-placeholder .thumbs-holder-inner {
+	background-color: #2b2b2b;
+}
+
+.kpp_night #middleCol > table > tbody > tr:nth-child(even) {
+	background-color: #494949!important;
+}
+.kpp_night #middleCol > table > tbody > tr:nth-child(odd) {
+	background-color: #6b6b6b!important;
+}
+.kpp_night #middleCol > table > tbody > tr > td.gray {
+    color: #f6f6f6;
+}
+.kpp_night .link-tab.active-link-tab {
+    background-color: #6b6b6b;
+}
+.kpp_night .conversationHolder .userInformation,
+.kpp_night .conversationHolder .kpdHolder{
+	     background-color: rgb(97 199 255);
+	 color: #000;
+}
+.kpp_night .conversationHolder .userInformation svg{
+	fill: #fff;
+}
+.kpp_night .kpdHolder .kpdViewCountHolder .kpdPostedDescription {
+	color: #000;
+}
+.kpp_night .conversationHolder .userInformation #userInfo.user-info-popup a,
+.kpp_night .conversationHolder .userInformation #userInfo.user-info-popup a span {
+	    color: #000!important;
+}
+.kpp_night .userInformation .moreInformationList{
+	background: #363636;
+}
+.kpp_night .userInformation .moreInformationList li:hover {
+    background-color: #686868;
+}
+.kpp_night .conversationBox,
+.kpp_night .conversationBox .messages-form,
+.kpp_night .conversationTextFieldHolder {
+	background: #1d1d1d;
+}
+.kpp_night .received .message {
+	    background-color: #474747;
+}
+.kpp_night .received .message-arrow {
+	    border-right: 8px solid #1D3F59;
+}
+.kpp_night .conversationBox .message {
+	    background-color: #11405a;
+}
+.kpp_night .sent .message-arrow {
+	    border-left: 8px solid #12405a;
+}
+.kpp_night .messages-date-separator {
+    color: #000;
+    background: #b8b8b8;
+}
+.kpp_night .conversationTextFieldHolder .conversationTextField {
+	background: #000;
+	color: #fff;
+}
+.kpp_night #emoji-picker {
+	border: 2px solid #017ec3;
+	    background: #000;
+}
+.kpp_night .conversationTextFieldHolder .emoji .emoji-picker-holder .arrow-down:after {
+	background: #017ec3;
+}
+.kpp_night .notification-holder.pending {
+    background-color: #515151;
+}
+
+.kpp_night .notification-holder .notification-title,
+.kpp_night .notification-holder.pending .notification-body,
+.kpp_night .reviews-header .reviews-header__title,
+.kpp_night .reviews-list .single-review .single-review__header .single-review__username {
+	color: #fff;
+}
+.kpp_night .reviews-thumbs .reviews-thumbs__thumb.active {
+ 
+    background: #fff;
+}
+.kpp_night  .reviews-thumbs .reviews-thumbs__thumb {
+  border: 1px solid #fff;
+}
+.kpp_night .page-tabs .page-tabs__tab.active {
+
+    border-bottom: 2px solid #017ec3;
+
+}
+
+.kpp_night #transactionsForm > table > tbody > tr:nth-child(1) > td > div {
+	border: 1px solid #fff!important;
+    background-color: #666666!important;
+}
+.kpp_night #prepaidBalance {
+	    color: #06e306!important;
+}
+
+.kpp_night #transactionsForm tr.transaction td,
+.kpp_night #transactionsForm tr.transaction td a {
+	color:#fff!important;
+}
+.kpp_night .kp-preporucuje {
+	background: #09496c;
+    border: 1px solid #017ec3;
+}
+.kpp_night .kp-preporucuje h2 {
+	color:#fff!important;
+}
+.kpp_night  div.kpAutocompleteOutter {
+	    background-color: #000000;
+}
+.kpp_night .kpAutocmpleteList li.highlightedAutocomplete {
+    background-color: #7d7d7d;
+}
+.kpp_night #leftNav a.mojKp:hover {
+    background-color: #00669e;
+  
+}
+.kpp_night #inboxForm > div.tabHeaderBLR > table > tbody > tr:nth-child(1) > td > div:nth-child(1) > label,
+.kpp_night #inboxForm > div.tabHeaderBLR > table > tbody > tr:nth-child(1) > td > div:nth-child(4) > label,
+.kpp_night #inboxForm > div.tabHeaderBLR > table > tbody > tr:nth-child(1) > td > div:nth-child(5) > label {
+	color:#fff!important;
+}
+.kpp_night #inboxForm #dropdown,
+.kpp_night #inboxForm .labelHolder,
+.kpp_night #inboxForm .uiMenuGroup .uiMenuItem {
+	    color: #fff;
+}
+.kpp_night div.pageBarHolder ul.pagesList li a:hover {
+    color: #fff;
+    background: #7e7e7e;
+  
+}
+.kpp_night #soGeDialog p {
+	color:#000;
+}
+.kpp_night #soGePricePromo.ad-price-promo {
+    color: #00b074;
+    
+}
+.kpp_night .conversationTextFieldHolder .textFieldButtonsHolder .textFieldInsertLinks {
+   
+    color: #e1e1e1;
+ 
+}
+.kpp_night .conversationTextFieldHolder .message-submit .text {
+	color: #626262;
+}
+.kpp_night .conversationTextFieldHolder .message-submit.c-button--blue .text {
+	color: #fff;
+}
+.kpp_night table#pricelist thead {
+    background: #686868;
+}
+.kpp_night .info-tooltip .info-tooltip-icon {
+    color: #fff;
+   
+}
+.kpp_night #oglas-holder > section > div.oglas-options > div.oglas-option.share-option > div.pill-menu > a {
+	color: #000!important;
+}
+.kpp_night .big-image-footer {
+    
+    color: #d1d1d1;
+  
+}
+.kpp_night .pageNotification {
+	background-color: #507621;
+}
+.kpp_night #feedbackFormHolder,
+.kpp_night #feedbackNPSHolder {
+	    background-color: #464646;
+}
+.kpp_night div.backToTopHolder {
+	    background: #017ec3;
+    border-color: #79d0ff;
+}
+.kpp_night #kpp_float_holder {
+	    background: #171717;
+		    border-top: 1px solid rgb(113, 113, 113);
+}
+.kpp_night .gsTextTooltip, 
+.kpp_night .titleTooltip{
+	    background-color: #2b2b2b;
+}
+.kpp_night #adFormProgressFloatingHolder,
+.kpp_night #adFormProgressFloatingHolder.floating {
+	    background: #535353;
+}
+
+.kpp_night div.adFormProgressButton.done {
+    background-color: #757575;
+}
+.kpp_night div.adFormProgressButton.active {
+    background-color: #333333;
+  
+}
+.kpp_night .group-suggestions-list label:hover {
+    background-color: #515151;
+}
+.kpp_night .selectable.selected, 
+.kpp_night .optional.selected
+{
+    background: #535353;
+}
+.kpp_night .alert-warning {
+    background-color: #201b00;
+    border-color: #faebcc;
+    color: #ffa914;
+}
+.kpp_night .uiMenuRecentValuesHolder {
+    background-color: #111;
+}
+.kpp_night .floatTel img {
+	    filter: invert(0.9);
+}
+.kpp_night div.kpBoxContentOutter {
+	background: #004e90;
+}
+.kpp_night div.kpBoxContentOutter .c-button.c-button--white-blue {
+    color: #fff;
+}
+.kpp_night div.kpBoxContentOutter .c-button.c-button--white-blue:hover {
+   background: rgb(255 255 255 / 22%);
+}
+.kpp_night #servicePage, 
+.kpp_night .servicePage {
+    color: white;
+}
+.kpp_night #servicePage > table > tbody:nth-child(2) > tr > td {
+	background-color: #1c1c1c!important;
+}
+.kpp_night #QRCodeDescription {
+	background-color: rgb(26 26 26);
+}
+.kpp_night .user-info-popup * {
+    color: #000!important;
+}
+.kpp_night .ad-options .ad-option[action-name="more-holder"] .action-menu a {
+	color: #000;
+}
+.kpp_night #noSavedSearches .textHolder {
+    color: #fbfbfb;
+}
+.kpp_night #noSavedSearches .textHolder span {
+	background: #fff;
+    border-radius: 3px;
+}
+.kpp_night .saveSearchHolder #addNewSearchLink {
+	background: #fff;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+.kpp_night .saved-item-content .saved-title {
+    color: #fff;
+}
+.kpp_night .saved-item-content p {
+	color: #aeaeae;
+}
+.kpp_night #savedSearchHolder .notification-holder svg {
+    stroke: #fafafa;
+}
+.kpp_night #bankCreditTrigger {
+	 color: #e3e3e3!important;
+}
+.kpp_night #bankCreditPopup {
+	color: #000;
+}
+.kpp_night #bankCreditTrigger img[alt="opt-logo"] {
+	background: #fff;
+}
+.kpp_night .c-addressbook .c-empty-state .c-empty-state__text,
+.kpp_night .no-ads-following-container .no-ads-following-message p {
+	color: #e2e2e2;
+}
+.kpp_night .c-addressbook .c-empty-state .c-empty-state__text .svg-icon.stroke--navy {
+    stroke: #fff;
+}
+.kpp_night .no-ads-following-container .no-ads-following-message .pill-element {
+	color: #fff;
+}
+.kpp_night #savedSearchHolder .entry > .delete-item.open {
+	 background: #000;
+}
