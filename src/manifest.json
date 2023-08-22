@@ -1,32 +1,29 @@
 {
   "name": "KP Pomagač",
-  "description": "Dodatne opcije za KP sajt koje nam svima nedostaju",
-  "version": "1.2.7",
+  "description": "Dodatne opcije za KP sajt: Brzi pregled oglasa, Noćni režim, Uveličaj sliku na klik, Plutajuća traka sa informacijama, Proširi sajt.",
+  "version": "2.0.0",
   
   "author": "Stefan Marjanov",
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false
   },
-  "web_accessible_resources" : [{
-	  "resources": ["whitelogo.svg"],
-      "matches": [ "https://www.kupujemprodajem.com/*" ]
-  }],
+
   "permissions": [
     "storage"
   ],
   "host_permissions": [
-	  "https://www.kupujemprodajem.com/*"
+	  "https://novi.kupujemprodajem.com/*"
   ],
   "content_scripts": [ 
   {
     "js": [ "jquery.min.js",  "content.js" ],
-    "matches": [ "https://www.kupujemprodajem.com/*"],
+    "matches": [ "https://novi.kupujemprodajem.com/*"],
 	"run_at": "document_start"
   },
   {
 	"css": ["style.css"],
-    "matches": [ "https://www.kupujemprodajem.com/*"]
+    "matches": [ "https://novi.kupujemprodajem.com/*"]
   }
   ],
 

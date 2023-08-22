@@ -1,3 +1,21 @@
+v2.0.0
+- Novo: dodatak sada podržava novi KP sajt (koji je rađen u Next.js) i više ne podržava stari
+- Novo: dodata opcija "Proširi sajt" - Proširuje sajt i povećava font tako da je sajt pregledniji na većim ekranima.
+- Novo: modernije ikonice za svaku opciju
+- Novo: podešavanja dodatka se automatski snimaju (više nije potrebno kliknuti "Sačuvaj")
+- Novo: kada se opcija promeni, dostupan je taster koji automatski osvežava sve KP tabove u Browser-u
+- Novo: pored KP logotipa stoji "+" tako da korisnik zna da je KPP dodatak aktivan
+- Novo: dodata podrška za oglase tipa "Poslovi"
+- Novo: u prozoru "brzi pregled oglasa" dodata ikonica indikator statusa korisnika (zeleno-online, crveno-offline, sivo-sakriven status)
+- Poboljšano: noćni mod je kompatibilniji sa novim dizajnom i smanjen je broj grešaka
+- Poboljšano: noćni mod radi i na "Dodaj oglas" stranici, kao i na stranici sa porukama
+- Poboljšano: taster za uveličavanje slike više ne prekriva celu sliku pa je moguće otvoriti oglas i klikom na sliku
+- Poboljšano: razne CSS izmene KPP elemenata za moderniji izgled
+- Poboljšano: ažuriran jQuery na 3.7.0 (smanjen sa 87kb na 85kb)
+- Uklonjeno: opcija "brzi pregled ocena" je uklonjena jer je redudantna sa opcijom "brzi prikaz oglasa" i pravi nepotreban saobraćaj ka KP sajtu
+- Ostalo: ikonica KPP dodatka je malo izmenjena
+- Napomena: ovo je prva verzija koja je rađena za novi KP sajt, moguće su greške (prijaviti ih na email dodatka)
+
 v1.2.7
 - Dodatak migriran na Manifest V3 verziju
 - CSS ispravke, najviše za novu opciju "Sačuvaj pretragu"
