@@ -1,9 +1,12 @@
 // ---------------------------------------------
 // Author: Stefan Marjanov - stefanmarjanov.com
 // ---------------------------------------------
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
 
 // Preuzmi user opcije i prosledi u init
-chrome.storage.sync.get({
+browser.storage.sync.get({
 	quick_view: true,
 	night_mode: true,
 	bigimg: true,
@@ -11,9 +14,72 @@ chrome.storage.sync.get({
 	night_mode_auto: true,
 	night_mode_addad: false,
 	wideSite: true
-	}, function(items) {
+	},(items) => {
 	init([items.quick_view, items.night_mode, items.bigimg, items.floatInfo, items.night_mode_auto, items.night_mode_addad, items.wideSite]);
 });
+
+function applyColors(tip = "dark"){
+	if(tip == "dark"){
+		document.documentElement.classList.add('kpp_night');
+		$(":root").css({
+			"--color-primary-black": "#fff",
+			"--color-primary-white": "#181818",
+			"--color-primary-navy-blue": "#ececec",
+			"--color-primary-sky-blue": "#2099dc",
+			"--color-primary-gray": "#3b3b3b",
+			"--color-grayscale-4": "#414141",
+			"--color-grayscale-elm-1": "#414141",
+			"--color-secondary-bg-brown": "#3b3211",
+			"--color-grayscale-1": "#aeaeae",
+			"--color-secondary-gold": "#4b3d14",
+			"--color-secondary-text-red": "#e93f3f",
+			"--color-secondary-text-brown": "#edba63",
+			"--color-secondary-bg-blue": "#142833",
+			"--color-primary-action-red": "#e03d27",
+			"--color-grayscale-3": "#484848",
+			"--color-secondary-price-red": "#e82626"
+		});
+		$('svg[class^="Logo_svgLogo__"] g path[fill="#003368"]').attr('fill', '#ffffff');
+		
+	} else {
+		document.documentElement.classList.remove('kpp_night');
+		$(":root").css({
+			"--color-primary-black": "",
+			"--color-primary-white": "",
+			"--color-primary-navy-blue": "",
+			"--color-primary-sky-blue": "",
+			"--color-primary-gray": "",
+			"--color-grayscale-4": "",
+			"--color-grayscale-elm-1": "",
+			"--color-secondary-bg-brown": "",
+			"--color-grayscale-1": "",
+			"--color-secondary-gold": "",
+			"--color-secondary-text-red": "",
+			"--color-secondary-text-brown": "",
+			"--color-secondary-bg-blue": "",
+			"--color-primary-action-red": "",
+			"--color-grayscale-3": "",
+		});
+		$('svg[class^="Logo_svgLogo__"] g path[fill="#ffffff"]').attr('fill', '#003368');
+		
+	}
+}
+
+function checkColorMode(isNightMode, isNightAddad, isAddAdPage, isNightAuto, isSystemDark ){
+	if( isNightMode ){ 
+		if(isNightAddad && isAddAdPage){ // Ako smo na "Dodaj oglas" i ako je korisnik omogućio opciju isNightAddad - isključi night mode
+			applyColors("light");
+		} else { // Ako smo na bilo kojoj drugoj stranici...
+			if(isNightAuto){ // Ako korisnik želi da uskladi dark mode sa sistemom
+				if(isSystemDark) { // Ako je dark mode u sistemu zapravo uključen
+					applyColors("dark");
+				}
+			} else {
+				applyColors("dark");
+			}
+		}
+	}
+}
 
 function waitForElm(selector) {
     return new Promise(resolve => {
@@ -35,54 +101,9 @@ function waitForElm(selector) {
     });
 }
 
-function applyColors(tip = "dark"){
-	if(tip == "dark"){
-		$(":root").css({
-			"--color-primary-black": "#fff",
-			"--color-primary-white": "#181818",
-			"--color-primary-navy-blue": "#ececec",
-			"--color-primary-sky-blue": "#2099dc",
-			"--color-primary-gray": "#3b3b3b",
-			"--color-grayscale-4": "#414141",
-			"--color-grayscale-elm-1": "#414141",
-			"--color-secondary-bg-brown": "#3b3211",
-			"--color-grayscale-1": "#aeaeae",
-			"--color-secondary-gold": "#4b3d14",
-			"--color-secondary-text-red": "#e93f3f",
-			"--color-secondary-text-brown": "#edba63",
-			"--color-secondary-bg-blue": "#142833",
-			"--color-primary-action-red": "#e03d27",
-			"--color-grayscale-3": "#484848",
-			"--color-secondary-price-red": "#e82626"
-		});
-		document.documentElement.classList.add('kpp_night');
-		$('svg[class^="Logo_svgLogo__"] > g[clip-path="url(#clip0)"] path[fill="#003368"]').attr('fill', '#ffffff');
-	} else {
-		$(":root").css({
-			"--color-primary-black": "",
-			"--color-primary-white": "",
-			"--color-primary-navy-blue": "",
-			"--color-primary-sky-blue": "",
-			"--color-primary-gray": "",
-			"--color-grayscale-4": "",
-			"--color-grayscale-elm-1": "",
-			"--color-secondary-bg-brown": "",
-			"--color-grayscale-1": "",
-			"--color-secondary-gold": "",
-			"--color-secondary-text-red": "",
-			"--color-secondary-text-brown": "",
-			"--color-secondary-bg-blue": "",
-			"--color-primary-action-red": "",
-			"--color-grayscale-3": "",
-		});
-		document.documentElement.classList.remove('kpp_night');
-		$('svg[class^="Logo_svgLogo__"] > g[clip-path="url(#clip0)"] path[fill="#ffffff"]').attr('fill', '#003368');
-	}
-}
-
-
 // Main fn
 function init(options) {
+	
 	var isQuickView = options[0];
 	var isNightMode = options[1];
 	var isBigImg = options[2];
@@ -90,8 +111,19 @@ function init(options) {
 	var isNightAuto = options[4];
 	var isNightAddad = options[5];
 	var isWideSite = options[6];
-	
 	var isSystemDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? true : false;
+	var href = window.location.href;
+	var isAddAdPage = (href.indexOf("/postavljanje-oglasa") > -1) ? true : false; // Proveri stranicu prilikom load-a
+	
+	// Uraditi proveru što pre kako bismo izbegli "white flash" prilikom učitavanja stranice
+	// (fn se poziva samo prilikom page refresh)
+	checkColorMode(isNightMode, isNightAddad, isAddAdPage, isNightAuto, isSystemDark);
+	
+	if( isWideSite ){
+		document.documentElement.classList.add('kpp_wide');
+	} else {
+		document.documentElement.classList.remove('kpp_wide');
+	}
 	
 	// Detektuj promenu URL-a u SPA
 	var previousUrl = '';
@@ -110,6 +142,7 @@ function init(options) {
 	$("body").off("click",".kpp_quick-view");
 	$("body").off("click",".kpp_close_modal");
 	$("body").off("click",".zoomImg");
+	$("body").off("click",".openLightbox");
 	$(".adImgHolder").off("click");
 	$(".kppLightbox").off("click");
 	if($("#kpp_float_holder").length > 0){
@@ -118,37 +151,17 @@ function init(options) {
 	if($("#kpp_modal_holder").length > 0){
 		$("#kpp_modal_holder").remove();
 	}
-
+	
+	// SPA menja URL i ne osvežava stranicu - proveri URL
 	var isSingle = (href.indexOf("/oglas") > -1) ? true : false;
-	var isAddAdPage = (href.indexOf("/postavljanje-oglasa") > -1) ? true : false;
 	var isGrupa = ( href.indexOf("/grupa") > -1 || href.indexOf("/pretraga") > -1 || href.indexOf("/najnoviji") > -1 || href.indexOf("/svi-oglasi") > -1  ) ? true : false;
-	
-	
-	// Ukljuci night mode (izvan document.body kako bismo primenili klasu što pre i izbegli white flash)
-	if( isNightMode ){ 
-		if(isNightAddad && isAddAdPage){ // Ako smo na "Dodaj oglas" i ako je korisnik omogućio opciju isNightAddad - isključi night mode
-			applyColors("light");
-			
-		} else { // Ako smo na bilo kojoj drugoj stranici...
-			if(isNightAuto){ // Ako korisnik želi da uskladi dark mode sa sistemom
-				if(isSystemDark) { // Ako je dark mode u sistemu zapravo uključen
-					applyColors("dark");
-				}
-			} else {
-				applyColors("dark");
-				
-			}
-		}
-
-	}
-	
-	if( isWideSite ){ 
-		document.documentElement.classList.add('kpp_wide');
-	} else {
-		document.documentElement.classList.remove('kpp_wide');
-	}
+	var isAddAdPage = (href.indexOf("/postavljanje-oglasa") > -1) ? true : false;
 	
 	$(document.body).ready(function() { // Sačekaj da se html učita (samo za first time load)
+	
+		// Potrebno je i ovde proveriti ako želimo da manipulišemo DOM u zavisnosti od Night mode
+		// (fn se poziva samo prilikom navigacije)
+		checkColorMode(isNightMode, isNightAddad, isAddAdPage, isNightAuto, isSystemDark);
 		
 		// FLOAT TRAKA
 		if(isfloatInfo && isSingle) { // Samo ako je korisnik omogućio opciju i ako smo na single ad stranici
@@ -217,7 +230,7 @@ function init(options) {
 							$(".zoomImgHolder",$(this)).remove();
 						}
 						$(this).addClass("zoomImgWrap");
-						$("article[class^='AdItem_adHolder__']",$(this)).prepend('<div class="zoomImgHolder" data-bigimg="'+big_img+'"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"><path d="M13 10h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2zm8.172 14l-7.387-7.387c-1.388.874-3.024 1.387-4.785 1.387-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9c0 1.761-.514 3.398-1.387 4.785l7.387 7.387-2.828 2.828zm-12.172-8c3.859 0 7-3.14 7-7s-3.141-7-7-7-7 3.14-7 7 3.141 7 7 7z"/></svg></div>');
+						$("article[class^='AdItem_adHolder__']",$(this)).prepend('<div class="openLightbox zoomImgHolder" data-bigimg="'+big_img+'"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"><path d="M13 10h-3v3h-2v-3h-3v-2h3v-3h2v3h3v2zm8.172 14l-7.387-7.387c-1.388.874-3.024 1.387-4.785 1.387-4.971 0-9-4.029-9-9s4.029-9 9-9 9 4.029 9 9c0 1.761-.514 3.398-1.387 4.785l7.387 7.387-2.828 2.828zm-12.172-8c3.859 0 7-3.14 7-7s-3.141-7-7-7-7 3.14-7 7 3.141 7 7 7z"/></svg></div>');
 						
 					}
 					
@@ -238,7 +251,7 @@ function init(options) {
 		
 		if(isQuickView) {
 			
-			// Oko ovog posla 3 dana...
+			// Oko ovog posla 5 dana...
 			$("body").on("click",".kpp_quick-view",function(e){
 			e.preventDefault();
 			var url = $(this).data("kppurl");
@@ -260,7 +273,7 @@ function init(options) {
 				   
 				   // Pokupi informacije
 				   var podaci = $.parseHTML(podaci);
-				   $("#kpp_modal_data").html('<div id="drag_box" class="kpp_modal_title kpp_row">Učitavanje...</div><div class="kpp_modal_info kpp_row"><div class="photo-col">Učitavanje...</div><div class="contact-col"><div class="kpp_modal_single_info kpp_modal_cena"></div><div class="kpp_modal_single_info kpp_modal_korisnik"></div><div class="kpp_modal_single_info kpp_modal_korisnik_details"></div><div class="kpp_modal_single_info kpp_modal_ocene"></div><div class="kpp_modal_single_info kpp_modal_tel"></div><div class="kpp_modal_single_info kpp_modal_poseti"></div></div></div><div class="kpp_modal_desc kpp_row"><div class="desc_data">Učitavanje...</div></div>');
+				   $("#kpp_modal_data").html('<div id="drag_box" class="kpp_modal_title kpp_row">Učitavanje...</div><div class="kpp_modal_info"><div class="photo-col" id="kppGalleryHolder">Učitavanje...</div><div class="contact-col"><div class="kpp_modal_single_info kpp_modal_cena"></div><div class="kpp_modal_single_info kpp_modal_korisnik"></div><div class="kpp_modal_single_info kpp_modal_korisnik_details"></div><div class="kpp_modal_single_info kpp_modal_ocene"></div><div class="kpp_modal_single_info kpp_modal_tel"></div><div class="kpp_modal_single_info kpp_modal_poseti"></div></div></div><div class="kpp_modal_desc kpp_row"><div class="desc_data">Učitavanje...</div></div>');
 				   
 				   var ocene = $(podaci).find("div[class^='ReviewThumbLinks_reviewsHolder__']").html();
 				   var oceneUrl = "Nema ocena";
@@ -268,16 +281,7 @@ function init(options) {
 				   if(typeof ocene !== "undefined" && ocene !== "" ){
 					   var oceneUrl = ocene;
 				   }
-				   
-				   var big_img = $(podaci).find("div[class^='AdViewInfo_imageHolder__'] img").attr('src');
-				   if(big_img) {
-					   big_img = big_img.replace('tmb-300x300-', 'big-');
-					   $('.kpp_modal_info .photo-col').html('<a href="https://www.kupujemprodajem.com/big-photo-'+oglasid+'-1.htm" target="_blank"><img src="'+big_img+'" title="Slika oglasa" /></a>');
-					   
-				   } else {
-						$('.kpp_modal_info .photo-col').html( $(podaci).find("div[class^='AdViewInfo_imageHolder__']").html() );
-				   }
-				   
+				  
 				   // Popuni modal
 				   $('.kpp_modal_title').html('<a href="'+url+'" class="kpp_pop_title" title="Otvori oglas u novoj kartici" target="_blank">'+$(podaci).find("h1[class^='AdViewInfo_name__']").text()+'</a>');
 				   $('.kpp_modal_info .kpp_modal_cena').html($(podaci).find("h2[class^='AdViewInfo_price__']").text());
@@ -291,7 +295,10 @@ function init(options) {
 					var jsonObject = JSON.parse(nextData);
 					var next = jsonObject["props"]["pageProps"]["initialState"]["ad"]["byId"][oglasid];
 					
+					
 					if(next != null){
+						
+						// Phone
 						if(next.ownerPhone != ""){
 							$('.kpp_modal_tel').html('Telefon: '+next.ownerPhone);
 						} else if(next.jobApplicationLink != ""){ // Ako je ad tipa Job i postoji link za apliciranje
@@ -311,7 +318,67 @@ function init(options) {
 							$('#userIcon').css('stroke','');
 							$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je sakrio svoj status");
 						}
+						
+						// Galerija
+						var galeryArray = next.photos;
+						if(Array.isArray(galeryArray) && galeryArray.length > 1 ){ // Imamo galeriju i galerija ima više od 1 slike (jer ako ima samo jednu, onda to i nije baš galerija)
+						
+							var big_img = false;
+							$("#kppGalleryHolder").html('<section id="main-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section><section id="thumbnail-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section>');
+							$.each(galeryArray, function( index, value ) {
+								$("#thumbnail-carousel ul.splide__list").append('<li class="splide__slide"><img data-splide-lazy="'+value.thumbnail+'" alt="umanjena slika oglasa"></li>');
+								
+								$("#main-carousel ul.splide__list").append('<li class="splide__slide"><img class="openLightbox" data-bigimg="'+value.fullscreen+'" data-splide-lazy="'+value.original+'" alt="slika oglasa"></li>');
+								
+							});
+							var mainSlider = new Splide( '#main-carousel', {
+								type      : 'fade',
+								rewind    : true,
+								pagination: false,
+								arrows    : true,
+								lazyLoad  : 'nearby',
+								preloadPages: 1
+							  } );
+
+							  var thumbnailsSlider = new Splide( '#thumbnail-carousel', {
+								fixedWidth  : 100,
+								fixedHeight : 60,
+								gap         : 0,
+								rewind      : true,
+								pagination  : false,
+								isNavigation: true,
+								lazyLoad  : 'nearby',
+								preloadPages: 3,
+								focus      : 'center',
+								breakpoints : {
+								  600: {
+									fixedWidth : 60,
+									fixedHeight: 44,
+								  },
+								},
+							  } );
+
+							  mainSlider.sync( thumbnailsSlider );
+							  mainSlider.mount();
+							  thumbnailsSlider.mount();
+						}
+					} // next podaci
+					
+					// Ako nemamo galeriju ili joj se nešto (pu pu pu) desilo, prikažu običnu sliku				
+					if( !mainSlider || !thumbnailsSlider ){
+						
+						var big_img = $(podaci).find("div[class^='AdViewInfo_imageHolder__'] img").attr('src');
+						if(big_img){ // Ima makar jednu sliku
+							var full_img = big_img.replace('tmb-300x300-', ''); // Zameni umanjenu sliku sa najvećom
+							big_img = big_img.replace('tmb-300x300-', 'big-'); // Zameni umanjenu sliku sa malo većom
+							
+							$('.kpp_modal_info .photo-col').html('<img class="openLightbox" data-bigimg="'+full_img+'" src="'+big_img+'" />');
+						} else { // Nema nijednu baš sliku?! Ok, prikaži šta ima
+							$('.kpp_modal_info .photo-col').html( $(podaci).find("div[class^='AdViewInfo_imageHolder__']").html() );
+						}
 					}
+					
+				  
 			   },
 			   error: function(err){
 				    $("#kpp_modal_data").html("Greška u povlačenju podataka sa sajta. Proverite internet konekciju i da li je KP sajt dostupan. Potom osvežite stranicu i probajte opet.");
@@ -321,7 +388,8 @@ function init(options) {
 
 			$(document).mouseup(function(e) {
 				var container = $("#kpp_modal_window");
-				if (!container.is(e.target) && container.has(e.target).length === 0) {
+				
+				if (!container.is(e.target) && container.has(e.target).length === 0 && e.target.className != "kpp_lightbox_holder" && e.target.className != "lightboximg"  && e.target.className != "kppLightbox" ) {
 					container.remove();
 					$("#kpp_modal_holder").remove();
 				}
@@ -334,10 +402,20 @@ function init(options) {
 		} // isQuickView
 		
 		
-		$( "body" ).on( "click",".zoomImgHolder", function(e){
+		$( "body" ).on( "click",".openLightbox", function(e){
 			e.preventDefault();
-			var bigImgUrl = $(this).data("bigimg");
-			$(".kppLightbox").html('<div class="kpp_lightbox_holder"><img src="'+bigImgUrl+'"><span class="closeLightbox"><svg width="10" height="10" viewBox="0 0 8 8" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" class="asIcon_lightBlueStroke__GC9a2 asIcon_svg__Zm34q"><path d="M1 7L7 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 7L1 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>').fadeIn(220);
+			
+			var bigImgUrl = false;
+			
+			if( $(this).data("bigimg") != "" ){
+				bigImgUrl = $(this).data("bigimg");
+			} else if( $(this).prop("currentSrc") != undefined ) {
+				bigImgUrl = $(this).prop("currentSrc");
+			}
+			
+			if(bigImgUrl != false){
+				$(".kppLightbox").html('<div class="kpp_lightbox_holder"><img class="lightboximg" src="'+bigImgUrl+'"><span class="closeLightbox"><svg width="10" height="10" viewBox="0 0 8 8" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" class="asIcon_lightBlueStroke__GC9a2 asIcon_svg__Zm34q"><path d="M1 7L7 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7 7L1 1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>').fadeIn(220);
+			}
 			
 		});
 		
