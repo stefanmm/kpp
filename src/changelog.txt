@@ -1,3 +1,6 @@
+v2.0.2 (hotfix)
+- Ispravljeno: "brzi pregled oglasa": u nekim slučajevima galerija ne može biti pronađena
+
 v2.0.1
 - Novo: kada se otvori brzi pregled oglasa, ako oglas ima više od jedne slike prikazaće se galerija
 - Novo: galerija u brzom pregledu oglasa može da se skroluje, ima umanjene sličice ispod, i svaka slika može da se uveliča

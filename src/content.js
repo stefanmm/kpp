@@ -101,6 +101,25 @@ function waitForElm(selector) {
     });
 }
 
+function findKeyInObject(obj, targetKey) {
+	if (typeof obj !== 'object' || obj === null) {
+		return null;
+	}
+
+	if (targetKey in obj) {
+		return obj[targetKey];
+	}
+
+	for (const key in obj) {
+		const result = findKeyInObject(obj[key], targetKey);
+		if (result !== null) {
+			return result;
+		}
+	}
+
+	return null;
+}
+					
 // Main fn
 function init(options) {
 	
@@ -293,10 +312,11 @@ function init(options) {
 				   
 				   var nextData = $(podaci).filter('script#__NEXT_DATA__').text();
 					var jsonObject = JSON.parse(nextData);
-					var next = jsonObject["props"]["pageProps"]["initialState"]["ad"]["byId"][oglasid];
+					if(jsonObject && oglasid) {
+						var next = findKeyInObject(jsonObject, oglasid);
+					}
 					
-					
-					if(next != null){
+					if(typeof next !== 'undefined'){
 						
 						// Phone
 						if(next.ownerPhone != ""){
@@ -321,9 +341,10 @@ function init(options) {
 						
 						// Galerija
 						var galeryArray = next.photos;
+						
 						if(Array.isArray(galeryArray) && galeryArray.length > 1 ){ // Imamo galeriju i galerija ima više od 1 slike (jer ako ima samo jednu, onda to i nije baš galerija)
 						
-							var big_img = false;
+							var big_img = true;
 							$("#kppGalleryHolder").html('<section id="main-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section><section id="thumbnail-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section>');
 							$.each(galeryArray, function( index, value ) {
 								$("#thumbnail-carousel ul.splide__list").append('<li class="splide__slide"><img data-splide-lazy="'+value.thumbnail+'" alt="umanjena slika oglasa"></li>');
@@ -364,11 +385,11 @@ function init(options) {
 						}
 					} // next podaci
 					
-					// Ako nemamo galeriju ili joj se nešto (pu pu pu) desilo, prikažu običnu sliku				
-					if( !mainSlider || !thumbnailsSlider ){
-						
+					if(!big_img) { // Ako nemamo galeriju ili joj se nešto (pu pu pu) desilo, prikažu običnu sliku
+					
 						var big_img = $(podaci).find("div[class^='AdViewInfo_imageHolder__'] img").attr('src');
 						if(big_img){ // Ima makar jednu sliku
+						
 							var full_img = big_img.replace('tmb-300x300-', ''); // Zameni umanjenu sliku sa najvećom
 							big_img = big_img.replace('tmb-300x300-', 'big-'); // Zameni umanjenu sliku sa malo većom
 							
@@ -377,7 +398,6 @@ function init(options) {
 							$('.kpp_modal_info .photo-col').html( $(podaci).find("div[class^='AdViewInfo_imageHolder__']").html() );
 						}
 					}
-					
 				  
 			   },
 			   error: function(err){
