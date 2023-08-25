@@ -102,6 +102,7 @@ function waitForElm(selector) {
 }
 
 function findKeyInObject(obj, targetKey) {
+	
 	if (typeof obj !== 'object' || obj === null) {
 		return null;
 	}
@@ -116,9 +117,11 @@ function findKeyInObject(obj, targetKey) {
 			return result;
 		}
 	}
-
+	
 	return null;
 }
+
+
 					
 // Main fn
 function init(options) {
@@ -292,7 +295,25 @@ function init(options) {
 				   
 				   // Pokupi informacije
 				   var podaci = $.parseHTML(podaci);
-				   $("#kpp_modal_data").html('<div id="drag_box" class="kpp_modal_title kpp_row">Učitavanje...</div><div class="kpp_modal_info"><div class="photo-col" id="kppGalleryHolder">Učitavanje...</div><div class="contact-col"><div class="kpp_modal_single_info kpp_modal_cena"></div><div class="kpp_modal_single_info kpp_modal_korisnik"></div><div class="kpp_modal_single_info kpp_modal_korisnik_details"></div><div class="kpp_modal_single_info kpp_modal_ocene"></div><div class="kpp_modal_single_info kpp_modal_tel"></div><div class="kpp_modal_single_info kpp_modal_poseti"></div></div></div><div class="kpp_modal_desc kpp_row"><div class="desc_data">Učitavanje...</div></div>');
+				   $("#kpp_modal_data").html('\
+					<div id="drag_box" class="kpp_modal_title kpp_row">Učitavanje...</div>\
+					<div class="kpp_modal_info">\
+						<div class="photo-col" id="kppGalleryHolder">Učitavanje...</div>\
+						<div class="contact-col">\
+							<div class="kpp_modal_single_info kpp_modal_cena"></div>\
+							<div class="kpp_modal_korisnik_wrap kpp_modal_single_info">\
+								<div class="kpp_modal_korisnik"></div>\
+								<div class="kpp_modal_korisnik_details"></div>\
+							</div>\
+							<div class="kpp_modal_single_info kpp_modal_ocene">\
+							</div>\
+							<div class="kpp_modal_single_info kpp_modal_tel">\
+							</div>\
+							<div class="kpp_modal_single_info kpp_modal_poseti btn_holder"></div>\
+						</div>\
+					</div>\
+					<div class="kpp_modal_desc kpp_row"><div class="desc_data">Učitavanje...</div></div>\
+				   ');
 				   
 				   var ocene = $(podaci).find("div[class^='ReviewThumbLinks_reviewsHolder__']").html();
 				   var oceneUrl = "Nema ocena";
@@ -307,13 +328,15 @@ function init(options) {
 				   $('.kpp_modal_info .kpp_modal_korisnik').html("<svg id='userIcon' stroke='#181818' width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg' ><path fill-rule='evenodd' clip-rule='evenodd' d='M8 7.5C9.933 7.5 11.5 5.933 11.5 4C11.5 2.067 9.933 0.5 8 0.5C6.067 0.5 4.5 2.067 4.5 4C4.5 5.933 6.067 7.5 8 7.5Z' stroke-linecap='round' stroke-linejoin='round'></path><path d='M1.5 15.5C1.5 11.9101 4.41015 9.5 8 9.5C11.5898 9.5 14.5 11.9101 14.5 15.5' stroke-linecap='round' stroke-linejoin='round'></path></svg> "+$(podaci).find("div[class^='UserSummary_userNameHolder__'] > span:not([class^='Badge_badgeHolder__'])").text()+'<span id="userOnline"></span>');
 				   $('.kpp_modal_info .kpp_modal_korisnik_details').html($(podaci).find("div[class^='UserSummary_userDetails__'] > div").html());
 				   $('.kpp_modal_info .kpp_modal_ocene').html('Ocene: '+oceneUrl);
-				   $('.kpp_modal_info .kpp_modal_poseti').html('<a href="'+url+'" target="_blank" class="kpp_pop_otvori_oglas" title="Otvori oglas u novoj kartici">Otvori oglas <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="14" height="14" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#307dc1" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
+				   $('.kpp_modal_info .kpp_modal_poseti').html('<a href="'+url+'" target="_blank" class="kpp_pop_otvori_oglas" title="Otvori oglas u novoj kartici">Otvori oglas <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
 				   $('.kpp_modal_desc .desc_data').html($(podaci).find("section[class*='AdPage_adInfoBox__'] > div[class^='Grid_row__']").html());
 				   
 				   var nextData = $(podaci).filter('script#__NEXT_DATA__').text();
 					var jsonObject = JSON.parse(nextData);
 					if(jsonObject && oglasid) {
+						
 						var next = findKeyInObject(jsonObject, oglasid);
+						
 					}
 					
 					if(typeof next !== 'undefined'){
@@ -322,7 +345,19 @@ function init(options) {
 						if(next.ownerPhone != ""){
 							$('.kpp_modal_tel').html('Telefon: '+next.ownerPhone);
 						} else if(next.jobApplicationLink != ""){ // Ako je ad tipa Job i postoji link za apliciranje
-							$('.kpp_modal_tel').html('Kontakt: <a title="Poseti sajt korisnika u novom tabu" class="kpp_pop_otvori_oglas" href="'+next.jobApplicationLink+'" rel="nofollow" target="_blank">Sajt korisnika <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="14" height="14" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#307dc1" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
+							$('.kpp_modal_tel').html('Kontakt: <a title="Poseti sajt korisnika u novom tabu" class="kpp_pop_external_link" href="'+next.jobApplicationLink+'" rel="nofollow" target="_blank">Sajt korisnika <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#2099dc" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
+						} else {
+							$('.kpp_modal_tel').remove();
+						}
+						
+						// KP izlog
+						if( next.kpizlog == true && next.user.kpizlogUrl != "" ){
+							$('.kpp_modal_info .kpp_modal_poseti').append('<a href="'+next.user.kpizlogUrl+'" target="_blank" class="kpp_pop_otvori_oglas kpp_kpizlog" title="Otvori KP izlog u novoj kartici"><span class="kp_monogram_k">k</span><span class="kp_monogram_p">p</span> Izlog</a>');
+						}
+						
+						// Info box
+						if( next.user.infoBox != "" ){
+							$('.kpp_modal_desc').append('<div class="desc_data dodatne_informacije_korisnik"><section class="AdViewDescription_descriptionHolder__"><p style="margin-bottom:10px;font-weight: bold;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="dodatne_informacije_korisnik_svg "><path fill-rule="evenodd" clip-rule="evenodd" d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.5 11H9C8.44772 11 8 10.5523 8 10V7.5C8 7.22386 7.77614 7 7.5 7H7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.75 4.5C7.61193 4.5 7.5 4.61193 7.5 4.75C7.5 4.88807 7.61193 5 7.75 5C7.88807 5 8 4.88807 8 4.75C8 4.61193 7.88807 4.5 7.75 4.5V4.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> Informacije:</p>'+next.user.infoBox+'</section></div>');
 						}
 						
 						// Proveri status korisnika (offline/online/sakriven)

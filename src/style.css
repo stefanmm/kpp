@@ -106,8 +106,13 @@ div[class^="Header_header__" ] div[class^="Header_headerInner__" ] > div[class^=
 }
 
 .zoomImgWrap:hover .zoomImgHolder {
-	width: 40px;
-	height: 40px;
+	width: 46px;
+	height: 46px;
+}
+
+.zoomImgWrap:hover .zoomImgHolder svg {
+	height: 23px;
+	width: 23px;
 }
 
 .zoomImgHolder {
@@ -148,7 +153,7 @@ div[class^="Header_header__" ] div[class^="Header_headerInner__" ] > div[class^=
 	transition: all .2s ease-in-out;
 }
 
-.zoomImgHolder:hover svg {
+.zoomImgWrap .zoomImgHolder:hover svg {
 	height: 30px;
 	width: 30px;
 }
@@ -222,9 +227,33 @@ div[class^="Header_header__" ] div[class^="Header_headerInner__" ] > div[class^=
 .kpp_close_modal svg {
 	stroke: #fff;
 }
-
+a.kpp_pop_external_link {
+	color: var(--color-primary-sky-blue);
+}
 a.kpp_pop_otvori_oglas {
-	color: #307DC1;
+	background: rgb(48, 125, 193);
+    display: block;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+	border: 1px solid rgb(48, 125, 193);
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+}
+a.kpp_pop_otvori_oglas.kpp_kpizlog {
+	margin-left: 5px;
+	background: transparent;
+	color: rgb(48, 125, 193);
+}
+a.kpp_pop_otvori_oglas:hover {
+	background: rgb(48 125 193 / 15%);
+	color: rgb(48, 125, 193);
+}
+a.kpp_pop_otvori_oglas:hover svg g {
+	
+	fill: rgb(48, 125, 193);
 }
 
 div.adListContainer div.item .kpIzlogHolder {
@@ -307,13 +336,17 @@ div.adListContainer div.item .kpIzlogHolder {
 	height: 100%;
 	width: 100%;
 	padding: 10px;
-	;
 }
 
 .kpp_modal_title {
 	margin-bottom: 10px;
 }
-
+.contact-col {
+	-webkit-box-flex: 1;
+	    -ms-flex: 1;
+	        flex: 1;
+	text-align: center;
+}
 #userIcon {
 	stroke: #181818;
 }
@@ -321,18 +354,63 @@ div.adListContainer div.item .kpIzlogHolder {
 .kpp_modal_korisnik {
 	font-weight: bold;
 }
-
-.kpp_modal_single_info {
-	font-size: 16px;
-	margin: 0;
-	padding: 5px 0;
+.kpp_modal_ocene {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
-
+.kpp_modal_cena {
+	color: var(--color-secondary-price-red);
+	
+}
+.kpp_modal_single_info:not(.btn_holder) {
+	border: 1px solid #d2d6da;
+    padding: 15px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+	    font-weight: bold;
+}
+.kpp_modal_single_head {
+	font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid #d2d6da;
+    margin-bottom: 10px;
+    padding: 6px;
+}
 .desc_data {
 	display: block;
-	margin-top: 10px;
+	margin-top: 15px;
 	border: 1px solid #317dc1;
 	padding: 5px;
+	border-radius: 5px;
+}
+.kpp_modal_poseti {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+.kp_monogram_k {
+	color: var(--color-primary-action-red);
+	display: inline;
+    font-size: inherit;
+    font-weight: 700;
+}
+.kp_monogram_p {
+	color: var(--color-primary-navy-blue);
+	display: inline;
+    font-size: inherit;
+    font-weight: 700;
+}
+.dodatne_informacije_korisnik_svg {
+	stroke: var(--color-primary-navy-blue);
+	    display: inline;
+    vertical-align: middle;
 }
 
 .kpp_row {
@@ -341,16 +419,7 @@ div.adListContainer div.item .kpIzlogHolder {
 	position: relative;
 }
 
-.kpp_modal_cena {
-	color: #cc0000;
-	font-weight: bold;
-}
 
-.kpp_modal_ocene {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-}
 
 .kpp_modal_ocene > a {
 	margin-left: 10px;
@@ -485,7 +554,7 @@ html.async-hide {
      object-fit: cover;
 }
 .splide__slide {
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .splide__slide.is-active {
@@ -576,6 +645,13 @@ html.async-hide {
 		max-width: 1000px;
 		max-height: 830px;
 	}
+	.kpp_wide .kpp_modal_info .photo-col {
+		margin-right: 80px;
+		
+	}
+	.kpp_wide [class*="CategoryBox_listItem__"] [class*="CategoryBox_listItemName__"] {
+		max-width: 32rem;
+	}
 	
 	
 }
@@ -592,8 +668,7 @@ html.async-hide {
 	color: #fff;
 }
 
-.kpp_night .kpp_modal_title a,
-.kpp_night a.kpp_pop_otvori_oglas {
+.kpp_night .kpp_modal_title a {
 	color: rgb(80 165 241);
 }
 
@@ -660,5 +735,16 @@ html.async-hide {
 }
 
 .kpp_night div[class^="Header_header__" ] div[class^="Header_headerInner__" ] > div[class^="Header_headerColLeft__" ]:after {
+	color: #fff;
+}
+.kpp_night a.kpp_pop_otvori_oglas:hover {
+	
+	color: #fff;
+}
+.kpp_night a.kpp_pop_otvori_oglas:hover svg g {
+	
+	fill: #ffffff;
+}
+.kpp_night a.kpp_pop_otvori_oglas.kpp_kpizlog {
 	color: #fff;
 }

@@ -1,3 +1,9 @@
+v2.0.3
+- Novo: u panelu za brzi pregled oglasa dodate su informacije koje korisnik prikazuje istovremeno u svim svojim oglasima
+- Poboljšano: "brzi pregled oglasa" panel je stilizovan
+- Ispravljeno: sitne CSS i JS ispravke
+- Ostalo: dodatak se sada zove "KP Plus"
+
 v2.0.2 (hotfix)
 - Ispravljeno: "brzi pregled oglasa": u nekim slučajevima galerija ne može biti pronađena
 

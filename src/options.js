@@ -67,11 +67,8 @@ function save_options() {
 		
 		var status = document.getElementById('status');
 		status.innerHTML = 'Opcije su sačuvane <span id="opcijeReloadSite"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABC0lEQVR4nJ3TO04DUQwF0AQBC4CGil9oQ9bABsIGWELEp0KCsJfsIi0oW4CeTyQ6PhV0B1l40GSYiSCWLD09+15f2++1WjWGNnrop+/HXTWnDriKM0x920d62D2OsYxzjKrgdUzwggtsl2K7GOI9c0YYVytPcIvNhrai8gGeU9EMwWlWrgVnzpFZG5cHNg3ZTeDMW4q2sp3wjSLQS8adeQTzmA9j0gvgrrBXEHzW7rUZ3M719hdqAZ3EdAu2J1z+U/7Dj2qc4BVbfwDHJt4wKF+u4CYfUiNJgu9wHZhqMJ5ykISSeLadSs8hOyoHeK2pQiiJD/NY+kyxobDoefCrcgNRDLZb+s5xrl3zFxmenz2CEuYiAAAAAElFTkSuQmCC" style="vertical-align: bottom;"> Osveži sve KP tabove</span>';
-		status.style.opacity ="1";
-		setTimeout(function() {
-		  status.innerHTML = '';
-		  status.style.opacity ="0";
-		}, 7000);
+		status.style.opacity = "1";
+		
 	}
 
 	function onError(error) {
