@@ -1,5 +1,5 @@
-# KP Pomagač
-Dodatne opcije za KP sajt koje nam svima nedostaju (Chrome add-on)
+# KP Plus
+Dodatne opcije za KP sajt koje nam svima nedostaju (Browser add-on)
 
 ## Mogućnosti :cake:
 Sve opcije se mogu uključiti/isključiti preko panela sa podešavanjima dodatka.
@@ -15,10 +15,11 @@ Kada je uključena ova opcija moguće je kliknuti na sličicu u spisku oglasa i 
 Pojavljuje se na stranici oglasa kada korisnik skroluje dole. U traci se nalaze slika oglasa, naziv, cena i naziv prodavca.
 
 ## Instaliraj :sparkles:
-https://chrome.google.com/webstore/detail/kp-pomaga%C4%8D/iicoeicpkpoiiajjgobdgnlahooalbfo
+- [Chrome, Brave, Edge...](https://chrome.google.com/webstore/detail/kp-pomaga%C4%8D/iicoeicpkpoiiajjgobdgnlahooalbfo) (i drugi Browser-i koji su bazirani na Chromium-u)
+- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/kp-plus/)
 
 ## Youtube video :play_or_pause_button:
-[<img src="https://img.youtube.com/vi/3sPQS_QIwUk/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=3sPQS_QIwUk "Prikaz dodatka")
+[<img src="https://img.youtube.com/vi/F6xLaBQf2rY/maxresdefault.jpg" width="50%">](https://www.youtube.com/watch?v=F6xLaBQf2rY "Prikaz dodatka")
 
 ## Programer :wave:
 - https://www.stefanmarjanov.com/
