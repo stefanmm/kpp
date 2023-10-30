@@ -1,7 +1,7 @@
 {
 	"name": "KP Plus",
 	"description": "Dodatne opcije za KP sajt: Brzi pregled oglasa, Noćni režim, Uveličaj sliku na klik, Plutajuća traka sa informacijama, Proširi sajt.",
-	"version": "2.0.3",
+	"version": "2.0.4",
 
 	"author": "Stefan Marjanov",
 
@@ -22,17 +22,17 @@
 		"storage"
 	],
 	"host_permissions": [
-		"https://novi.kupujemprodajem.com/*"
+		"https://www.kupujemprodajem.com/*"
 	],
 	"content_scripts": [ 
 	{
 		"js": [ "jquery.min.js",  "content.js", "splide/splide.min.js" ],
-		"matches": [ "https://novi.kupujemprodajem.com/*"],
+		"matches": [ "https://www.kupujemprodajem.com/*"],
 		"run_at": "document_start"
 	},
 	{
 		"css": ["style.css", "splide/splide.min.css"],
-		"matches": [ "https://novi.kupujemprodajem.com/*"],
+		"matches": [ "https://www.kupujemprodajem.com/*"],
 		"run_at": "document_start"
 	}
 	],
