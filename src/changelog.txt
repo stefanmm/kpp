@@ -1,3 +1,6 @@
+v2.0.5
+- Ispravljeno: parsiranje informacija u prozoru za brzi pregled povodom nedavnih izmena na KP sajtu
+
 v2.0.3
 - Novo: u panelu za brzi pregled oglasa dodate su informacije koje korisnik prikazuje istovremeno u svim svojim oglasima
 - Poboljšano: "brzi pregled oglasa" panel je stilizovan

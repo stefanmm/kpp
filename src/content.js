@@ -294,7 +294,16 @@ function init(options) {
 				   }
 				   
 				   // Pokupi informacije
-				   var podaci = $.parseHTML(podaci);
+				   var nextData = $(podaci).filter('script#__NEXT_DATA__').text();
+					var jsonObject = JSON.parse(nextData);
+					
+					if(jsonObject && oglasid) {
+						
+						var next = findKeyInObject(jsonObject, oglasid);
+						
+					} 
+					if(typeof next === 'undefined'){ return; }
+					
 				   $("#kpp_modal_data").html('\
 					<div id="drag_box" class="kpp_modal_title kpp_row">Učitavanje...</div>\
 					<div class="kpp_modal_info">\
@@ -303,7 +312,6 @@ function init(options) {
 							<div class="kpp_modal_single_info kpp_modal_cena"></div>\
 							<div class="kpp_modal_korisnik_wrap kpp_modal_single_info">\
 								<div class="kpp_modal_korisnik"></div>\
-								<div class="kpp_modal_korisnik_details"></div>\
 							</div>\
 							<div class="kpp_modal_single_info kpp_modal_ocene">\
 							</div>\
@@ -314,125 +322,114 @@ function init(options) {
 					</div>\
 					<div class="kpp_modal_desc kpp_row"><div class="desc_data">Učitavanje...</div></div>\
 				   ');
-				   
-				   var ocene = $(podaci).find("div[class^='ReviewThumbLinks_reviewsHolder__']").html();
-				   var oceneUrl = "Nema ocena";
-					
-				   if(typeof ocene !== "undefined" && ocene !== "" ){
-					   var oceneUrl = ocene;
-				   }
 				  
 				   // Popuni modal
-				   $('.kpp_modal_title').html('<a href="'+url+'" class="kpp_pop_title" title="Otvori oglas u novoj kartici" target="_blank">'+$(podaci).find("h1[class^='AdViewInfo_name__']").text()+'</a>');
-				   $('.kpp_modal_info .kpp_modal_cena').html($(podaci).find("h2[class^='AdViewInfo_price__']").text());
-				   $('.kpp_modal_info .kpp_modal_korisnik').html("<svg id='userIcon' stroke='#181818' width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg' ><path fill-rule='evenodd' clip-rule='evenodd' d='M8 7.5C9.933 7.5 11.5 5.933 11.5 4C11.5 2.067 9.933 0.5 8 0.5C6.067 0.5 4.5 2.067 4.5 4C4.5 5.933 6.067 7.5 8 7.5Z' stroke-linecap='round' stroke-linejoin='round'></path><path d='M1.5 15.5C1.5 11.9101 4.41015 9.5 8 9.5C11.5898 9.5 14.5 11.9101 14.5 15.5' stroke-linecap='round' stroke-linejoin='round'></path></svg> "+$(podaci).find("div[class^='UserSummary_userNameHolder__'] > span:not([class^='Badge_badgeHolder__'])").text()+'<span id="userOnline"></span>');
-				   $('.kpp_modal_info .kpp_modal_korisnik_details').html($(podaci).find("div[class^='UserSummary_userDetails__'] > div").html());
-				   $('.kpp_modal_info .kpp_modal_ocene').html('Ocene: '+oceneUrl);
-				   $('.kpp_modal_info .kpp_modal_poseti').html('<a href="'+url+'" target="_blank" class="kpp_pop_otvori_oglas" title="Otvori oglas u novoj kartici">Otvori oglas <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
-				   $('.kpp_modal_desc .desc_data').html($(podaci).find("section[class*='AdPage_adInfoBox__'] > div[class^='Grid_row__']").html());
+				   $('.kpp_modal_title').html('<a href="'+url+'" class="kpp_pop_title" title="Otvori oglas u novoj kartici" target="_blank">'+next.formattedName+'</a>');
 				   
-				   var nextData = $(podaci).filter('script#__NEXT_DATA__').text();
-					var jsonObject = JSON.parse(nextData);
-					if(jsonObject && oglasid) {
+				   if(next.adKind == "job"){
+					   $('.kpp_modal_info .kpp_modal_cena').html(next.priceText);
+				   } else {
+					   $('.kpp_modal_info .kpp_modal_cena').html("Cena: "+next.priceText);
+				   }
+				   
+				   $('.kpp_modal_info .kpp_modal_korisnik').html("<svg id='userIcon' stroke='#181818' width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg' ><path fill-rule='evenodd' clip-rule='evenodd' d='M8 7.5C9.933 7.5 11.5 5.933 11.5 4C11.5 2.067 9.933 0.5 8 0.5C6.067 0.5 4.5 2.067 4.5 4C4.5 5.933 6.067 7.5 8 7.5Z' stroke-linecap='round' stroke-linejoin='round'></path><path d='M1.5 15.5C1.5 11.9101 4.41015 9.5 8 9.5C11.5898 9.5 14.5 11.9101 14.5 15.5' stroke-linecap='round' stroke-linejoin='round'></path></svg> "+next.user.username+'<span id="userOnline"></span>'+'<br>Član od '+next.user.created+'<br>'+next.user.userLocation);
+				   
+				   $('.kpp_modal_info .kpp_modal_ocene').html('Ocene: <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="asIcon_blueStroke__lvaue asIcon_svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 14.5C3.85146 14.5053 4.37134 14.7235 4.70932 14.82L6.902 15.346C7.25908 15.4481 7.62863 15.4999 8 15.5H11.2567C13.3109 15.5 15.2946 14.044 15.5 12V8.66667C15.5 7.00395 14.4568 5.95245 13.0667 5.604L12.2593 5.392C11.8132 5.28139 11.5 4.88095 11.5 4.42134V2.16667C11.5 1.33824 10.8284 0.5 10 0.5C9.17157 0.5 8.47261 1.33824 8.47261 2.16667V3.20267C8.47261 5.9641 6.26142 8.5 3.5 8.5V14.5Z" stroke-linecap="round" stroke-linejoin="round"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M0.499939 6.5H3.49994L3.49996 15.5H0.5L0.499939 6.5Z" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="ReviewThumbLinks_positive">'+next.user.reviewsPositive+'</span></span><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="asIcon_blueStroke__lvaue asIcon_svg__Zm34q"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 1.5C3.85146 1.49475 4.53803 1.40785 4.87601 1.31133L6.902 0.654003C7.25908 0.551948 7.62863 0.500116 8 0.500003H11.2567C13.3109 0.499977 15.2946 3.1227 15.5 5.16666V7.49999C15.5 9 14.6234 10.2142 13.2333 10.5627L12.2593 10.7747C11.8132 10.8853 11.5 11.2857 11.5 11.7453V14C11.5 14.8284 10.8284 15.5 10 15.5C9.17157 15.5 8.50401 14.8284 8.50401 14V12.964C8.50401 10.2026 6.26142 7.5 3.5 7.5V1.5Z" stroke-linecap="round" stroke-linejoin="round"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 9.50002H3.5V0.500011H0.5V9.50002Z" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="ReviewThumbLinks_negative">'+next.user.reviewsNegative+'</span></span>');
+				   
+				   $('.kpp_modal_info .kpp_modal_poseti').html('<a href="'+url+'" target="_blank" class="kpp_pop_otvori_oglas" title="Otvori oglas u novoj kartici">Otvori oglas <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
+				   
+				   
+				   if(next.website != "") {
+					   var website = '<section class="kpp_modal_desc_site"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.72133 6.50002C6.15717 5.86544 5.3491 5.50166 4.5 5.50002H3.5C1.84315 5.50002 0.5 6.84316 0.5 8.50002C0.5 10.1569 1.84315 11.5 3.5 11.5H4.5C5.34902 11.498 6.15696 11.1343 6.72133 10.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.27869 6.5C9.8428 5.86535 10.6509 5.50156 11.5 5.5H12.5C14.1569 5.5 15.5 6.67648 15.5 8.33334C15.5 9.99019 14.1569 11.5 12.5 11.5H11.5C10.651 11.4982 9.84295 11.1344 9.27869 10.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.5 8.50002H11.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> <a aria-label="Posetite websajt" target="_blank" id="" role="button" tabindex="-1" href="'+next.website+'">Posetite websajt</a></section>';
+				   } else {
+					   var website = "";
+				   }
+				   
+				   if(next.video != "") {
+					   var video = '<section class="kpp_modal_desc_site"><svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.47498 5.76666V10.5917L10.525 8.14166L6.47498 5.76666Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M2.975 3.41666C2.83214 3.41666 2.69175 3.42729 2.55528 3.44804C1.53099 3.6239 0.75 4.51767 0.75 5.59166V10.7167C0.75 11.9167 1.775 12.9167 2.975 12.9167H13.05C13.6596 12.9167 14.2112 12.665 14.6063 12.2601C14.9901 11.8606 15.225 11.3134 15.225 10.7167V5.36666C15.225 5.32317 15.2238 5.28024 15.2213 5.23789C15.052 4.20576 14.1546 3.41666 13.075 3.41666H2.975ZM13.075 12.1667H2.95C2.86851 12.1667 2.78633 12.1568 2.70475 12.1383C2.02528 12.0905 1.5 11.5346 1.5 10.8417V5.36666C1.5 5.11977 1.58697 4.90187 1.73031 4.72185C1.96374 4.38483 2.35341 4.16666 2.8 4.16666H13.075C13.8 4.16666 14.475 4.64166 14.475 5.36666V10.7167C14.475 11.4417 13.8 12.1667 13.075 12.1667Z"></path></svg> <a aria-label="Pustite video" target="_blank" id="" role="button" tabindex="-1" href="'+next.video+'">Pogledajte video</a></section>';
+				   } else {
+					   var video = "";
+				   }
+				   $('.kpp_modal_desc .desc_data').html(website+video+next.description);
+				   
+
+					// Phone
+					if(next.ownerPhone != ""){
+						$('.kpp_modal_tel').html('Telefon: '+next.ownerPhone);
+					} else if(next.jobApplicationLink != ""){ // Ako je ad tipa Job i postoji link za apliciranje
+						$('.kpp_modal_tel').html('Kontakt: <a title="Poseti sajt korisnika u novom tabu" class="kpp_pop_external_link" href="'+next.jobApplicationLink+'" rel="nofollow" target="_blank">Sajt korisnika <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#2099dc" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
+					} else {
+						$('.kpp_modal_tel').remove();
+					}
 						
-						var next = findKeyInObject(jsonObject, oglasid);
-						
+					// KP izlog
+					if( next.kpizlog == true && next.user.kpizlogUrl != "" ){
+						$('.kpp_modal_info .kpp_modal_poseti').append('<a href="'+next.user.kpizlogUrl+'" target="_blank" class="kpp_pop_otvori_oglas kpp_kpizlog" title="Otvori KP izlog u novoj kartici"><span class="kp_monogram_k">k</span><span class="kp_monogram_p">p</span> Izlog</a>');
 					}
 					
-					if(typeof next !== 'undefined'){
+					// Info box
+					if( next.user.infoBox != "" ){
+						$('.kpp_modal_desc').append('<div class="desc_data dodatne_informacije_korisnik"><section class="AdViewDescription_descriptionHolder__"><p style="margin-bottom:10px;font-weight: bold;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="dodatne_informacije_korisnik_svg "><path fill-rule="evenodd" clip-rule="evenodd" d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.5 11H9C8.44772 11 8 10.5523 8 10V7.5C8 7.22386 7.77614 7 7.5 7H7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.75 4.5C7.61193 4.5 7.5 4.61193 7.5 4.75C7.5 4.88807 7.61193 5 7.75 5C7.88807 5 8 4.88807 8 4.75C8 4.61193 7.88807 4.5 7.75 4.5V4.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> Informacije:</p>'+next.user.infoBox+'</section></div>');
+					}
 						
-						// Phone
-						if(next.ownerPhone != ""){
-							$('.kpp_modal_tel').html('Telefon: '+next.ownerPhone);
-						} else if(next.jobApplicationLink != ""){ // Ako je ad tipa Job i postoji link za apliciranje
-							$('.kpp_modal_tel').html('Kontakt: <a title="Poseti sajt korisnika u novom tabu" class="kpp_pop_external_link" href="'+next.jobApplicationLink+'" rel="nofollow" target="_blank">Sajt korisnika <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256" style="fill:#000000;vertical-align:middle;"><g fill="#2099dc" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(2,2)"><path d="M84,11c-1.7,0 -3,1.3 -3,3c0,1.7 1.3,3 3,3h22.80078l-46.40039,46.40039c-1.2,1.2 -1.2,3.09922 0,4.19922c0.6,0.6 1.39961,0.90039 2.09961,0.90039c0.7,0 1.49961,-0.30039 2.09961,-0.90039l46.40039,-46.40039v22.80078c0,1.7 1.3,3 3,3c1.7,0 3,-1.3 3,-3v-30c0,-1.7 -1.3,-3 -3,-3zM24,31c-7.2,0 -13,5.8 -13,13v60c0,7.2 5.8,13 13,13h60c7.2,0 13,-5.8 13,-13v-45c0,-1.7 -1.3,-3 -3,-3c-1.7,0 -3,1.3 -3,3v45c0,3.9 -3.1,7 -7,7h-60c-3.9,0 -7,-3.1 -7,-7v-60c0,-3.9 3.1,-7 7,-7h45c1.7,0 3,-1.3 3,-3c0,-1.7 -1.3,-3 -3,-3z"></path></g></g></svg></a>');
+					// Proveri status korisnika (offline/online/sakriven)
+					if(next.user.isShowOnline == true){
+						if(next.user.isOnline == true) {
+							$('#userIcon').css('stroke','#6ab00f');
+							$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je Online");
 						} else {
-							$('.kpp_modal_tel').remove();
+							$('#userIcon').css('stroke','#f22e2e');
+							$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je Offline");
 						}
-						
-						// KP izlog
-						if( next.kpizlog == true && next.user.kpizlogUrl != "" ){
-							$('.kpp_modal_info .kpp_modal_poseti').append('<a href="'+next.user.kpizlogUrl+'" target="_blank" class="kpp_pop_otvori_oglas kpp_kpizlog" title="Otvori KP izlog u novoj kartici"><span class="kp_monogram_k">k</span><span class="kp_monogram_p">p</span> Izlog</a>');
-						}
-						
-						// Info box
-						if( next.user.infoBox != "" ){
-							$('.kpp_modal_desc').append('<div class="desc_data dodatne_informacije_korisnik"><section class="AdViewDescription_descriptionHolder__"><p style="margin-bottom:10px;font-weight: bold;"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="dodatne_informacije_korisnik_svg "><path fill-rule="evenodd" clip-rule="evenodd" d="M8 15.5C12.1421 15.5 15.5 12.1421 15.5 8C15.5 3.85786 12.1421 0.5 8 0.5C3.85786 0.5 0.5 3.85786 0.5 8C0.5 12.1421 3.85786 15.5 8 15.5Z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.5 11H9C8.44772 11 8 10.5523 8 10V7.5C8 7.22386 7.77614 7 7.5 7H7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M7.75 4.5C7.61193 4.5 7.5 4.61193 7.5 4.75C7.5 4.88807 7.61193 5 7.75 5C7.88807 5 8 4.88807 8 4.75C8 4.61193 7.88807 4.5 7.75 4.5V4.5" stroke-linecap="round" stroke-linejoin="round"></path></svg> Informacije:</p>'+next.user.infoBox+'</section></div>');
-						}
-						
-						// Proveri status korisnika (offline/online/sakriven)
-						if(next.user.isShowOnline == true){
-							if(next.user.isOnline == true) {
-								$('#userIcon').css('stroke','#6ab00f');
-								$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je Online");
-							} else {
-								$('#userIcon').css('stroke','#f22e2e');
-								$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je Offline");
-							}
-						} else { // Sakrio se
-							$('#userIcon').css('stroke','');
-							$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je sakrio svoj status");
-						}
-						
-						// Galerija
-						var galeryArray = next.photos;
-						
-						if(Array.isArray(galeryArray) && galeryArray.length > 1 ){ // Imamo galeriju i galerija ima više od 1 slike (jer ako ima samo jednu, onda to i nije baš galerija)
-						
-							var big_img = true;
-							$("#kppGalleryHolder").html('<section id="main-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section><section id="thumbnail-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section>');
-							$.each(galeryArray, function( index, value ) {
-								$("#thumbnail-carousel ul.splide__list").append('<li class="splide__slide"><img data-splide-lazy="'+value.thumbnail+'" alt="umanjena slika oglasa"></li>');
-								
-								$("#main-carousel ul.splide__list").append('<li class="splide__slide"><img class="openLightbox" data-bigimg="'+value.fullscreen+'" data-splide-lazy="'+value.original+'" alt="slika oglasa"></li>');
-								
-							});
-							var mainSlider = new Splide( '#main-carousel', {
-								type      : 'fade',
-								rewind    : true,
-								pagination: false,
-								arrows    : true,
-								lazyLoad  : 'nearby',
-								preloadPages: 1
-							  } );
-
-							  var thumbnailsSlider = new Splide( '#thumbnail-carousel', {
-								fixedWidth  : 100,
-								fixedHeight : 60,
-								gap         : 0,
-								rewind      : true,
-								pagination  : false,
-								isNavigation: true,
-								lazyLoad  : 'nearby',
-								preloadPages: 3,
-								focus      : 'center',
-								breakpoints : {
-								  600: {
-									fixedWidth : 60,
-									fixedHeight: 44,
-								  },
-								},
-							  } );
-
-							  mainSlider.sync( thumbnailsSlider );
-							  mainSlider.mount();
-							  thumbnailsSlider.mount();
-						}
-					} // next podaci
-					
-					if(!big_img) { // Ako nemamo galeriju ili joj se nešto (pu pu pu) desilo, prikažu običnu sliku
-					
-						var big_img = $(podaci).find("div[class^='AdViewInfo_imageHolder__'] img").attr('src');
-						if(big_img){ // Ima makar jednu sliku
-						
-							var full_img = big_img.replace('tmb-300x300-', ''); // Zameni umanjenu sliku sa najvećom
-							big_img = big_img.replace('tmb-300x300-', 'big-'); // Zameni umanjenu sliku sa malo većom
-							
-							$('.kpp_modal_info .photo-col').html('<img class="openLightbox" data-bigimg="'+full_img+'" src="'+big_img+'" />');
-						} else { // Nema nijednu baš sliku?! Ok, prikaži šta ima
-							$('.kpp_modal_info .photo-col').html( $(podaci).find("div[class^='AdViewInfo_imageHolder__']").html() );
-						}
+					} else { // Sakrio se
+						$('#userIcon').css('stroke','');
+						$('.kpp_modal_info .kpp_modal_korisnik').attr("title","Korisnik je sakrio svoj status");
 					}
+						
+					// Galerija
+					var galeryArray = next.photos;
+					
+					if(Array.isArray(galeryArray) && galeryArray.length > 0 ){
+					
+						$("#kppGalleryHolder").html('<section id="main-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section><section id="thumbnail-carousel" class="splide"><div class="splide__track"><ul class="splide__list"></ul></div></section>');
+						$.each(galeryArray, function( index, value ) {
+							$("#thumbnail-carousel ul.splide__list").append('<li class="splide__slide"><img data-splide-lazy="'+value.thumbnail+'" alt="umanjena slika oglasa"></li>');
+							
+							$("#main-carousel ul.splide__list").append('<li class="splide__slide"><img class="openLightbox" data-bigimg="'+value.fullscreen+'" data-splide-lazy="'+value.original+'" alt="slika oglasa"></li>');
+							
+						});
+						var mainSlider = new Splide( '#main-carousel', {
+							type      : 'fade',
+							rewind    : true,
+							pagination: false,
+							arrows    : true,
+							lazyLoad  : 'nearby',
+							preloadPages: 1
+						  } );
+
+						  var thumbnailsSlider = new Splide( '#thumbnail-carousel', {
+							fixedWidth  : 100,
+							fixedHeight : 60,
+							gap         : 0,
+							rewind      : true,
+							pagination  : false,
+							isNavigation: true,
+							lazyLoad  : 'nearby',
+							preloadPages: 3,
+							focus      : 'center',
+							breakpoints : {
+							  600: {
+								fixedWidth : 60,
+								fixedHeight: 44,
+							  },
+							},
+						  } );
+
+						  mainSlider.sync( thumbnailsSlider );
+						  mainSlider.mount();
+						  thumbnailsSlider.mount();
+					}
+
 				  
 			   },
 			   error: function(err){
