@@ -7,7 +7,7 @@ if (typeof browser === "undefined") {
 /* *********************** PERMISIJE *********************** */
 /* ********************************************************* */
 const permissions = {
-  origins: ["https://novi.kupujemprodajem.com/*"],
+  origins: ["https://www.kupujemprodajem.com/*"],
 };
 
 const checkbox_host_permission = document.getElementById("checkbox_host_permission");
@@ -36,7 +36,7 @@ browser.permissions.contains(permissions).then(granted => {
 
 
 function reloadTabs(){
-	browser.tabs.query({ url: 'https://novi.kupujemprodajem.com/*' }, function(tabs) {
+	browser.tabs.query({ url: 'https://www.kupujemprodajem.com/*' }, function(tabs) {
 		tabs.forEach(function(tab) {
 			browser.tabs.reload(tab.id);
 		});

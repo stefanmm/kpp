@@ -1,3 +1,6 @@
+v2.0.6
+- Ispravljeno: poruka u opcijama dodatka traži dozvole i u situacijama kada ne treba
+
 v2.0.5
 - Ispravljeno: parsiranje informacija u prozoru za brzi pregled povodom nedavnih izmena na KP sajtu
 
