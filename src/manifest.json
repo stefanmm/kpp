@@ -4,7 +4,14 @@
 	"version": "2.0.7",
 
 	"author": "Stefan Marjanov",
-
+	
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "kpp@sn.rs",
+			"strict_min_version": "109.0"
+		}
+	},
+	
 	"options_ui": {
 		"page": "options.html",
 		"open_in_tab": false,
