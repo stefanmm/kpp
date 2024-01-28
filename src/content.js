@@ -189,16 +189,17 @@ function init(options) {
 		if(isfloatInfo && isSingle) { // Samo ako je korisnik omogućio opciju i ako smo na single ad stranici
 			
 			waitForElm("section[class*='AdPage_adInfoBox__']").then((elm) => { // Sačekat da se el učita
-				
+					
 				// Prikupi podatke iz el
 				var floatNaziv = $("h1[class^='AdViewInfo_name__']").text().trim();
 				var floatPrice = $("h2[class^='AdViewInfo_price__']").text().trim();
 				var floatName = $("div[class^='UserSummary_userNameHolder__'] > span:not([class^='Badge_badgeHolder__'])").text().trim();
+				var floatImg = $("meta[property='og:image']").attr("content"); 
 				
-				if($("div[class^='AdViewInfo_imageHolder__'] img").length > 0){
-					var floatImg = '<img src="'+$("div[class^='AdViewInfo_imageHolder__'] img").attr("src")+'" alt="slika" />';
+				if( !floatImg.includes("static/images/meta/original.png") ){
+					var floatImg = '<img src="'+$("meta[property='og:image']").attr("content")+'" alt="slika" />'; 
 				} else {
-					var floatImg = $("div[class^='AdViewInfo_imageHolder__']").html();
+					var floatImg = "";
 				}
 				
 				// Kreiraj float traku
