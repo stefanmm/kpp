@@ -604,7 +604,7 @@ html.async-hide {
 	.kpp_wide [class*="CategoryBox_list__"], 
 	.kpp_wide [class*="AdItem_name__"],
 	.kpp_wide [class*="AdItem_adInfoHolder__"] {
-		font-size: 1.7rem!important;
+		font-size: 1.5rem!important;
 		
 	}
 	
@@ -710,7 +710,7 @@ html.async-hide {
 	background: #353535;
 }
 
-.kpp_night div[class^="MessageChatBox_chatBoxHolder__"] div[class^="MessageChatBox_chatBox___"] {
+.kpp_night div[class^="MessageChatBox_chatBoxHolder_"] div[class^="MessageChatBox_chatBox_"] {
 	background-blend-mode: color-burn;
 	background-color: #303030;
 }

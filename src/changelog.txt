@@ -1,3 +1,6 @@
+v2.0.8
+- Ažurirano: noćni mod prilagođen nakon izmena dizajna KP sajta
+
 v2.0.7
 - Ispravljeno: plutajuća traka se ne pojavljuje nakon poslednjeg ažuriranja KP sajta
 
