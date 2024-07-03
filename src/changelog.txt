@@ -1,3 +1,6 @@
+v2.0.9
+- Ispravljeno: sitne ispravke za noćni mod
+
 v2.0.8
 - Ažurirano: noćni mod prilagođen nakon izmena dizajna KP sajta
 
