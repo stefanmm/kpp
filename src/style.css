@@ -735,6 +735,31 @@ html.async-hide {
 	color: var(--color-primary-gray);
 }
 
+.kpp_night div[class*="MessageList_itemHolder"]:focus-visible,
+.kpp_night div[class*="MessageList_itemHolder"]:hover {
+	background-color: #2d2d2d;
+}
+
+.kpp_night div[class*="Message_isMessageAddress"],
+.kpp_night div[class*="Message_isMessageTrackingCode"] {
+	background-color: #4b3d0a!important;
+}
+.kpp_night div[class*="MessageAddress_addressMessageTitle"] {
+	background-color: #685400;
+	color: #ffffff;
+}
+.kpp_night div[class*="MessageAddress_addressMessageTitle"] {
+	background-color: #685400;
+	color: #ffffff;
+}
+.kpp_night div[class*="MessageAddress_addressMessageTitle"] > svg {
+	stroke: #ffffff;
+}
+.kpp_night div[class*="Message_isMessageAddress"]:before,
+.kpp_night div[class*="Message_isMessageTrackingCode"]:before {
+	border-left: .7rem solid #4b3d0a!important;
+}
+
 .kpp_night .tox .tox-edit-area__iframe {
 	background: #fff;
 }
