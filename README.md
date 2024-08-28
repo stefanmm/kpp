@@ -8,7 +8,7 @@ Kad god se na ekranu pojavi lista sa oglasima (bilo da se radi o rezultatima pre
 ### :computer: Proširi KP sajt
 Kada je ova opcija uključena, KP sajt postaje širi i font veći tako da je sajt pregledniji na većim ekranima.
 ### :new_moon: Noćni mod
-Ako je ova opcija uključena kupujemprodajem.com sajt će imati noćni mod koji je pogodan za čitanje noću. Ako je opcija "Automatski uskladi sa sistemom" uključena noćni mod na sajtu će biti sinhronizovan sa temom sistema ili veb pregledača. Ako je opcija "Onemogući prilikom dodavanja oglasa" uključena noćni mod će biti isključen na ekranu za dodavanje i uređivanje oglasa.
+KP (od avgusta 2024) ima ugrađen noćni mod koji prijavljeni korisnici mogu da podešavaju kroz postavke svog profila. Ovaj dodatak nudi opciju neprijavljenim korisnicima da forsiraju noćni mod takođe.
 ### :mag: Uveličaj sliku na klik
 Kada je uključena ova opcija moguće je kliknuti na sličicu u spisku oglasa i uveličati je preko celog ekrana u tzv. "lightbox".
 ### :arrow_down: Plutajuća traka sa informacijama
