@@ -672,25 +672,9 @@ html.async-hide {
 /**********************************************************************/
 /***************************** NIGHT MODE *****************************/
 /**********************************************************************/
-.kpp_night, .kpp_night body {
-	background-color: #2b2b2b;
-}
-
-.kpp_night #kpp_modal_window {
+body[data-theme="dark"] #kpp_modal_window {
 	background: #292929;
 	color: #fff;
-}
-
-.kpp_night .kpp_modal_title a {
-	color: rgb(80 165 241);
-}
-
-.kpp_night .kpp_modal_cena {
-	color: rgb(255 57 57);
-}
-
-.kpp_night #userIcon {
-	stroke: rgb(189 189 189);
 }
 
 .kpp_night .kpp_close_modal {
@@ -701,88 +685,26 @@ html.async-hide {
 	stroke: #000;
 }
 
-.kpp_night section[class*="CategoryHeadline_box__"] > div[class^="CategoryHeadline_itemHolder__"] > a img {
-	-webkit-filter: grayscale(100%) invert(100%);
-	filter: grayscale(100%) invert(100%);
-}
-
-.kpp_night #kpp_float_holder {
+body[data-theme="dark"] #kpp_float_holder {
 	background: #353535;
 }
 
-.kpp_night div[class^="MessageChatBox_chatBoxHolder_"] div[class^="MessageChatBox_chatBox_"] {
-	background-blend-mode: color-burn;
-	background-color: #303030;
-}
-
-.kpp_night div[class^="MainMessageTextField_textFieldHolder__"] #message::-webkit-input-placeholder {
-	color: var(--color-primary-gray);
-}
-
-.kpp_night div[class^="MainMessageTextField_textFieldHolder__"] #message::-moz-placeholder {
-	color: var(--color-primary-gray);
-}
-
-.kpp_night div[class^="MainMessageTextField_textFieldHolder__"] #message:-ms-input-placeholder {
-	color: var(--color-primary-gray);
-}
-
-.kpp_night div[class^="MainMessageTextField_textFieldHolder__"] #message::-ms-input-placeholder {
-	color: var(--color-primary-gray);
-}
-
-.kpp_night div[class^="MainMessageTextField_textFieldHolder__"] #message::placeholder {
-	color: var(--color-primary-gray);
-}
-
-.kpp_night div[class*="MessageList_itemHolder"]:focus-visible,
-.kpp_night div[class*="MessageList_itemHolder"]:hover {
-	background-color: #2d2d2d;
-}
-
-.kpp_night div[class*="Message_isMessageAddress"],
-.kpp_night div[class*="Message_isMessageTrackingCode"] {
-	background-color: #4b3d0a!important;
-}
-.kpp_night div[class*="MessageAddress_addressMessageTitle"] {
-	background-color: #685400;
-	color: #ffffff;
-}
-.kpp_night div[class*="MessageAddress_addressMessageTitle"] {
-	background-color: #685400;
-	color: #ffffff;
-}
-.kpp_night div[class*="MessageAddress_addressMessageTitle"] > svg {
-	stroke: #ffffff;
-}
-.kpp_night div[class*="Message_isMessageAddress"]:before,
-.kpp_night div[class*="Message_isMessageTrackingCode"]:before {
-	border-left: .7rem solid #4b3d0a!important;
-}
-
-.kpp_night .tox .tox-edit-area__iframe {
-	background: #fff;
-}
-
-.kpp_night .kpp_opcije {
+body[data-theme="dark"] .kpp_opcije {
 	background: #317ebf;
 }
 
-.kpp_night .kpp_quick-view svg {
+body[data-theme="dark"] .kpp_quick-view svg {
 	fill: #fff;
 }
 
-.kpp_night div[class^="Header_header__" ] div[class^="Header_headerInner__" ] > div[class^="Header_headerColLeft__" ]:after {
-	color: #fff;
-}
-.kpp_night a.kpp_pop_otvori_oglas:hover {
+body[data-theme="dark"] a.kpp_pop_otvori_oglas:hover {
 	
 	color: #fff;
 }
-.kpp_night a.kpp_pop_otvori_oglas:hover svg g {
+body[data-theme="dark"] a.kpp_pop_otvori_oglas:hover svg g {
 	
 	fill: #ffffff;
 }
-.kpp_night a.kpp_pop_otvori_oglas.kpp_kpizlog {
+body[data-theme="dark"] a.kpp_pop_otvori_oglas.kpp_kpizlog {
 	color: #fff;
 }

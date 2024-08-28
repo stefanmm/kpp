@@ -47,8 +47,6 @@ function save_options() {
 
 	var quick_view = document.getElementById('opt_quick_view').checked;
 	var night_mode = document.getElementById('opt_night_mode').checked;
-	var night_mode_auto = document.getElementById('opt_night_mode_auto').checked;
-	var night_mode_addad = document.getElementById('opt_night_mode_addad').checked;
 	var bigimg = document.getElementById('opt_bigimg').checked;
 	var floatInfo = document.getElementById('opt_floatInfo').checked;
 	var wideSite = document.getElementById('opt_wideSite').checked;
@@ -56,10 +54,8 @@ function save_options() {
 	browser.storage.sync.set({ 
 		quick_view: quick_view,
 		night_mode: night_mode,
-		night_mode_auto: night_mode_auto,
 		bigimg: bigimg,
 		floatInfo: floatInfo,
-		night_mode_addad: night_mode_addad,
 		wideSite: wideSite
 	}).then(setItems, onError);
 
@@ -82,26 +78,17 @@ function restore_options() {
 	browser.storage.sync.get({
 		quick_view: true,
 		night_mode: true,
-		night_mode_auto: true,
 		bigimg: true,
 		floatInfo: true,
-		night_mode_addad: false,
 		wideSite: true
 		},(items) => {
 
 			document.getElementById('opt_quick_view').checked = items.quick_view;
 			document.getElementById('opt_night_mode').checked = items.night_mode;
-			document.getElementById('opt_night_mode_auto').checked = items.night_mode_auto;
-			document.getElementById('opt_night_mode_addad').checked = items.night_mode_addad;
 			document.getElementById('opt_bigimg').checked = items.bigimg;
 			document.getElementById('opt_floatInfo').checked = items.floatInfo;
 			document.getElementById('opt_wideSite').checked = items.wideSite;
 			
-			if (document.getElementById('opt_night_mode').checked == true){
-				document.getElementById("nightAuto").style.display = "block";
-			} else {
-				document.getElementById("nightAuto").style.display = "none";
-			}
 	});
 
 }
@@ -113,20 +100,9 @@ document.addEventListener('DOMContentLoaded', restore_options);
 /* *********************** HOOK NA CHANGE EVENT ZA OPCIJE *********************** */
 /* ****************************************************************************** */
 document.getElementById('opt_night_mode').addEventListener('change', (event) => {
-	if (event.target.checked) {
-		document.getElementById("nightAuto").style.display = "block";
-	} else {
-		document.getElementById("nightAuto").style.display = "none";
-	}
 	save_options();
 });
 document.getElementById('opt_quick_view').addEventListener('change', (event) => {
-	save_options();
-});
-document.getElementById('opt_night_mode_auto').addEventListener('change', (event) => {
-	save_options();
-});
-document.getElementById('opt_night_mode_addad').addEventListener('change', (event) => {
 	save_options();
 });
 document.getElementById('opt_bigimg').addEventListener('change', (event) => {

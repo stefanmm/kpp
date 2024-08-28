@@ -11,112 +11,23 @@ browser.storage.sync.get({
 	night_mode: true,
 	bigimg: true,
 	floatInfo: true,
-	night_mode_auto: true,
-	night_mode_addad: false,
 	wideSite: true
 	},(items) => {
-	init([items.quick_view, items.night_mode, items.bigimg, items.floatInfo, items.night_mode_auto, items.night_mode_addad, items.wideSite]);
+	init([items.quick_view, items.night_mode, items.bigimg, items.floatInfo, items.wideSite]);
 });
 
-function applyColors(tip = "dark"){
-	if(tip == "dark"){
-		document.documentElement.classList.add('kpp_night');
-		$(":root").css({
-			"--kp-color-bg-primary": "#181818",
-			"--kp-color-bg-secondary": "#383838",
-			"--kp-color-border-default": "#393939",
-			"--kp-color-content-interactive-secondary": "#dddddd",
-			"--kp-color-content-interactive-primary": "#8acaef",
-			"--kp-color-content-regular-primary": "#dddddd",
-			"--kp-color-content-accent-secondary": "#007dff",
-			"--kp-color-brand-logo-navy-blue": "#dddddd",
-			"--kp-color-form-bg-input": "#272727",
-			"--kp-color-form-border-default": "#424242",
-			"--kp-color-form-bg-control": "#424242",
-			"--kp-color-form-bg-control-hover": "#585858",
-			"--kp-color-form-bg-selected": "#585858",
-			"--kp-color-fill-neutral": "#2f2f2f",
-			"--kp-color-fill-neutral-dim": "#4f4f4f",
-			"--kp-color-fill-interactive-secondary": "#1e5676",
-			"--kp-color-fill-interactive-secondary-hover": "#3589b9",
-			"--kp-color-bg-info": "#0d1920",
-			"--kp-color-fill-skeleton-dim": "#464646",
-			"--kp-color-bg-warning": "#372c00",
-			"--kp-color-fill-ZO-dim": "#574208",
-			"--kp-color-content-ZO": "#fed388",
-			"--kp-color-content-regular-secondary": "#979797",
-			"--kp-color-bg-alert": "#411d19",
-			"--color-primary-black": "#fff",
-			"--color-primary-white": "#000",
-			"--color-secondary-bg-blue": "#034263",
-			"--color-grayscale-elm-1": "#275386",
-			"--color-primary-navy-blue": "#5594d6",
-			"--color-primary-gray": "#303030",
-			"--kp-color-brand-monogram-navy-blue": "#2d94ff",
-			"--kp-color-fill-poslovi": " #487111",
-			"--kp-color-bg-base": " #4e4e4e",
-			"--kp-color-bg-tertiary": " #4a617c",
-
-		});
-		
-	} else {
-		document.documentElement.classList.remove('kpp_night');
-		$(":root").css({
-			"--kp-color-bg-primary": "",
-			"--kp-color-bg-secondary": "",
-			"--kp-color-border-default": "",
-			"--kp-color-content-interactive-secondary": "",
-			"--kp-color-content-interactive-primary": "",
-			"--kp-color-content-regular-primary": "",
-			"--kp-color-content-accent-secondary": "",
-			"--kp-color-brand-logo-navy-blue": "",
-			"--kp-color-form-bg-input": "",
-			"--kp-color-form-border-default": "",
-			"--kp-color-form-bg-control": "",
-			"--kp-color-form-bg-control-hover": "",
-			"--kp-color-form-bg-selected": "",
-			"--kp-color-fill-neutral": "",
-			"--kp-color-fill-neutral-dim": "",
-			"--kp-color-fill-interactive-secondary": "",
-			"--kp-color-fill-interactive-secondary-hover": "",
-			"--kp-color-bg-info": "",
-			"--kp-color-fill-skeleton-dim": "",
-			"--kp-color-bg-warning": "",
-			"--kp-color-fill-ZO-dim": "",
-			"--kp-color-content-ZO": "",
-			"--kp-color-content-regular-secondary": "",
-			"--kp-color-bg-alert": "",
-			"--color-primary-black": "",
-			"--color-primary-white": "",
-			"--color-secondary-bg-blue": "",
-			"--color-grayscale-elm-1": "",
-			"--color-primary-navy-blue": "",
-			"--color-primary-gray": "",
-			"--kp-color-brand-monogram-navy-blue": "",
-			"--kp-color-fill-poslovi": "",
-			"--kp-color-bg-base": "",
-			"--kp-color-bg-tertiary": "",
-
-		});
-
-		
-	}
-}
-
-function checkColorMode(isNightMode, isNightAddad, isAddAdPage, isNightAuto, isSystemDark ){
-	if( isNightMode ){ 
-		if(isNightAddad && isAddAdPage){ // Ako smo na "Dodaj oglas" i ako je korisnik omogućio opciju isNightAddad - isključi night mode
-			applyColors("light");
-		} else { // Ako smo na bilo kojoj drugoj stranici...
-			if(isNightAuto){ // Ako korisnik želi da uskladi dark mode sa sistemom
-				if(isSystemDark) { // Ako je dark mode u sistemu zapravo uključen
-					applyColors("dark");
-				}
-			} else {
-				applyColors("dark");
-			}
+function forceDark(dark = false){
+	
+	if(window.localStorage.getItem('meStats/groupedInfo') === null || window.localStorage.getItem('meStats/groupedInfo') === '1'){ // samo ako korisnik nije ulogovan
+		if(dark === true){
+			window.localStorage.setItem('meStats/groupedInfo', '1');
+			window.localStorage.setItem('theme', 'dark');
+		} else {
+			window.localStorage.removeItem('meStats/groupedInfo');
+			window.localStorage.removeItem('theme');
 		}
 	}
+	
 }
 
 function waitForElm(selector) {
@@ -168,16 +79,11 @@ function init(options) {
 	var isNightMode = options[1];
 	var isBigImg = options[2];
 	var isfloatInfo = options[3];
-	var isNightAuto = options[4];
-	var isNightAddad = options[5];
-	var isWideSite = options[6];
-	var isSystemDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? true : false;
-	var href = window.location.href;
-	var isAddAdPage = (href.indexOf("/postavljanje-oglasa") > -1) ? true : false; // Proveri stranicu prilikom load-a
+	var isWideSite = options[4];
 	
 	// Uraditi proveru što pre kako bismo izbegli "white flash" prilikom učitavanja stranice
 	// (fn se poziva samo prilikom page refresh)
-	checkColorMode(isNightMode, isNightAddad, isAddAdPage, isNightAuto, isSystemDark);
+	forceDark(isNightMode);
 	
 	if( isWideSite ){
 		document.documentElement.classList.add('kpp_wide');
@@ -215,13 +121,12 @@ function init(options) {
 	// SPA menja URL i ne osvežava stranicu - proveri URL
 	var isSingle = (href.indexOf("/oglas") > -1) ? true : false;
 	var isGrupa = ( href.indexOf("/grupa") > -1 || href.indexOf("/pretraga") > -1 || href.indexOf("/najnoviji") > -1 || href.indexOf("/svi-oglasi") > -1  ) ? true : false;
-	var isAddAdPage = (href.indexOf("/postavljanje-oglasa") > -1) ? true : false;
 	
 	$(document.body).ready(function() { // Sačekaj da se html učita (samo za first time load)
 	
 		// Potrebno je i ovde proveriti ako želimo da manipulišemo DOM u zavisnosti od Night mode
 		// (fn se poziva samo prilikom navigacije)
-		checkColorMode(isNightMode, isNightAddad, isAddAdPage, isNightAuto, isSystemDark);
+		forceDark(isNightMode);
 		
 		// FLOAT TRAKA
 		if(isfloatInfo && isSingle) { // Samo ako je korisnik omogućio opciju i ako smo na single ad stranici
