@@ -1,3 +1,6 @@
+v2.1.1
+- Ispravljeno: CSS prilagođen vizuelnim izmenama na KP (lightbox i brzi pregled)
+
 v2.1.0
 - Ažurirano: KP je dobio svoj noćni mod koji ulogovani korisnici mogu da menjaju. Dodak sada ima opciju za neprijavljene korisnike da forsiraju noćni mod.
 

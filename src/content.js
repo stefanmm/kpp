@@ -91,6 +91,24 @@ function init(options) {
 		document.documentElement.classList.remove('kpp_wide');
 	}
 	
+	if( isQuickView ){
+		document.documentElement.classList.add('kpp_quick_view_on');
+	} else {
+		document.documentElement.classList.remove('kpp_quick_view_on');
+	}
+	
+	if( isBigImg ){
+		document.documentElement.classList.add('kpp_lightbox_on');
+	} else {
+		document.documentElement.classList.remove('kpp_lightbox_on');
+	}
+	
+	if( isfloatInfo ){
+		document.documentElement.classList.add('kpp_float_on');
+	} else {
+		document.documentElement.classList.remove('kpp_float_on');
+	}
+	
 	// Detektuj promenu URL-a u SPA
 	var previousUrl = '';
 	var urlObserver = new MutationObserver(function(mutations) {

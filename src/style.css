@@ -134,8 +134,8 @@ div[class^="Header_header__" ] div[class^="Header_headerInner__" ] > div[class^=
 }
 
 .zoomImgHolder:hover {
-	width: 128px!important;
-	height: 120px!important;
+	width: 12.8rem!important;
+	height: 12rem!important;
 }
 
 .zoomImgHolder svg {
@@ -264,28 +264,28 @@ div.adListContainer div.item .kpIzlogHolder {
 	margin-right: 1px!important;
 }
 
+.kpp_quick_view_on div[class*="AdItem_price__"] {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
 .kpp_opcije {
-	background: rgb(255 255 255);
-	border-radius: 5px;
-	-webkit-box-shadow: 0 0 5px #00000026;
-	box-shadow: 0 0 5px #00000026;
 	width: 40px;
-	margin: 5px auto;
+	margin-left: 10px;
 	cursor: pointer;
+	opacity: 1;
 }
 
 .kpp_opcije:hover {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	background: #017ec3;
+	opacity: 0.6;
 }
 
-.kpp_opcije:hover svg {
-	fill: #fff;
-}
 
 .kpp_quick-view {
-	padding: 5px 0;
 	text-align: center;
 }
 
@@ -377,9 +377,15 @@ div.adListContainer div.item .kpIzlogHolder {
 	    font-weight: bold;
 }
 .kpp_modal_desc_site {
-	align-items: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     margin: 1.6rem;
 }
 .kpp_modal_desc_site > svg {
@@ -422,7 +428,7 @@ div.adListContainer div.item .kpIzlogHolder {
 }
 .dodatne_informacije_korisnik_svg {
 	stroke: var(--color-primary-navy-blue);
-	    display: inline;
+	display: inline;
     vertical-align: middle;
 }
 
@@ -690,7 +696,7 @@ body[data-theme="dark"] #kpp_float_holder {
 }
 
 body[data-theme="dark"] .kpp_opcije {
-	background: #317ebf;
+	
 }
 
 body[data-theme="dark"] .kpp_quick-view svg {
@@ -702,9 +708,11 @@ body[data-theme="dark"] a.kpp_pop_otvori_oglas:hover {
 	color: #fff;
 }
 body[data-theme="dark"] a.kpp_pop_otvori_oglas:hover svg g {
-	
 	fill: #ffffff;
 }
 body[data-theme="dark"] a.kpp_pop_otvori_oglas.kpp_kpizlog {
 	color: #fff;
+}
+body[data-theme="dark"] .dodatne_informacije_korisnik_svg {
+	stroke: var(--color-primary-white);
 }
